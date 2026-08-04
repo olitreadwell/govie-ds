@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.44.0](https://github.com/ogcio/govie-ds/compare/docs-v1.43.0...docs-v1.44.0) (2026-08-04)
+
+
+### Features
+
+* **AB#40291:** update autocomplete stories for view/interaction ([a77b2d0](https://github.com/ogcio/govie-ds/commit/a77b2d08b694c4f3de4da9af0abcb2b735403d44))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @ogcio/design-system-react bumped to 1.45.0
+
 ## [1.43.0](https://github.com/ogcio/govie-ds/compare/docs-v1.42.0...docs-v1.43.0) (2026-07-28)
 
 

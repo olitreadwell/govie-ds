@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.45.0](https://github.com/ogcio/govie-ds/compare/react-lib-v1.44.0...react-lib-v1.45.0) (2026-08-04)
+
+
+### Features
+
+* **AB#40291:** update autocomplete stories for view/interaction ([a77b2d0](https://github.com/ogcio/govie-ds/commit/a77b2d08b694c4f3de4da9af0abcb2b735403d44))
+* **AB#40371:** group Footer atoms and align styles with the core convention ([e434cfe](https://github.com/ogcio/govie-ds/commit/e434cfedb722f473781e900ddca168787e62108e))
+* **AB#40371:** rework the styling and helper architecture ([eac175a](https://github.com/ogcio/govie-ds/commit/eac175a11c7ef80937c857ee282b86dee3f4703f))
+
+
+### Bug Fixes
+
+* **AB#40291:** support dynamic input ID in Autocomplete ([7a421a7](https://github.com/ogcio/govie-ds/commit/7a421a7ce1b040cc90d73f28f351fd4b705987c3))
+* **AB#40478:** stabilise SelectNext interaction tests ([99651c7](https://github.com/ogcio/govie-ds/commit/99651c798eed5f16b932f7c3281bfe7b9f6aeaee))
+
 ## [1.44.0](https://github.com/ogcio/govie-ds/compare/react-lib-v1.43.0...react-lib-v1.44.0) (2026-07-28)
 
 
