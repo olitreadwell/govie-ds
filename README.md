@@ -91,16 +91,16 @@ Prerequisites:
 - jq (`brew install jq`)
 
 ```bash
-pnpm gen:licences
+pnpm gen:licenses
 ```
 
 You can also run the script directly:
 
 ```bash
-sh ./scripts/licences.sh
+sh ./scripts/licenses.sh
 ```
 
-This generates `LICENCES.md` with a table of package name, version, and license for all dependencies.
+This generates `LICENSES.md` with a table of package name, version, and license for all dependencies.
 
 ## Testing
 
