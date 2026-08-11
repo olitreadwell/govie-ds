@@ -62,7 +62,7 @@ This project includes the following packages that are publicly available on npm:
 ```bash
 corepack enable
 pnpm install
-pnpm ds
+pnpm docs
 ```
 
 ## Scripts
