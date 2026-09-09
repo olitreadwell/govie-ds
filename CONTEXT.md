@@ -28,13 +28,13 @@
 
 ## Gap ledger (dedupe — READ FIRST, never re-pick)
 - `2026-08-05` README license-report command names (gen:licences/licences.sh/LICENCES.md -> American names) — pr-opened-locally-verified (fork PR #1, closed) — do NOT re-pick; still present upstream but already attempted
-- `2026-09-09` trivial-fix pass (typos/broken links/stale commands) — pr-opened (fork PR) — see mined gaps
+- `2026-09-09` trivial-fix pass (typos/broken links/stale commands) — pr-opened (fork PR #22, docs/fix-typos-and-broken-links) — 7 fixes across 4 files
 
 ## Mined gaps (discovered, not yet attempted)
-- `2026-09-09` packages/react/README.md: "optinionated" -> "opinionated" (typo) — status: attempted
-- `2026-09-09` packages/react/README.md: broken French string `previous: 'Précédent:,` -> `'Précédent',` (docs site has it correct) — status: attempted
-- `2026-09-09` packages/react/README.md: stale link `http://ds.blocks.gov.ie/components/library/pagination/#i18n-keys` -> `https://ds.services.gov.ie/...` (old domain redirects to homepage) — status: attempted
-- `2026-09-09` packages/html/ds/README.md: "and and" duplicate word — status: attempted
-- `2026-09-09` packages/html/ds/README.md: duplicate list number "2." -> "3." — status: attempted
-- `2026-09-09` packages/design/theme-builder/README.md: "provides tool creating" -> "provides a tool for creating" — status: attempted
-- `2026-09-09` apps/docs/content/3-components/1-setup-guides/2-react.mdx: "if you interested" -> "if you are interested" — status: attempted
+- `2026-09-09` packages/react/README.md: "optinionated" -> "opinionated" (typo) — status: pr-opened
+- `2026-09-09` packages/react/README.md: broken French string `previous: 'Précédent:,` -> `'Précédent',` (docs site has it correct) — status: pr-opened
+- `2026-09-09` packages/react/README.md: stale link `http://ds.blocks.gov.ie/components/library/pagination/#i18n-keys` -> `https://ds.services.gov.ie/...` (old domain redirects to homepage) — status: pr-opened
+- `2026-09-09` packages/html/ds/README.md: "and and" duplicate word — status: pr-opened
+- `2026-09-09` packages/html/ds/README.md: duplicate list number "2." -> "3." — status: pr-opened
+- `2026-09-09` packages/design/theme-builder/README.md: "provides tool creating" -> "provides a tool for creating" — status: pr-opened
+- `2026-09-09` apps/docs/content/3-components/1-setup-guides/2-react.mdx: "if you interested" -> "if you are interested" — status: pr-opened
