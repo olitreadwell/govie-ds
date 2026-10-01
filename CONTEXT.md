@@ -1,5 +1,5 @@
 # ogcio/govie-ds context
-> refreshed 2026-09-30 | upstream default: main @ a140fcfd
+> refreshed 2026-10-02 | upstream default: main @ a140fcfd
 
 ## Identity & policies
 - upstream: ogcio/govie-ds, default branch `main`, primary language TypeScript, English-first: yes (all docs/README in English)
@@ -25,11 +25,13 @@
 ## Issue-area health
 - Repo is a design system; docs/README are the low-risk surface for trivial fixes
 - Re-verified 2026-09-30: upstream has ZERO open issues (only 7 open PRs, all internal); no maintainer-engaged open issue → repo-audit path used
+- Re-verified 2026-10-02: still ZERO open issues and 7 open PRs (all internal) — no maintainer-engaged issue → repo-audit path used again
 
 ## Gap ledger (dedupe — READ FIRST, never re-pick)
 - `2026-08-05` README license-report command names (gen:licences/licences.sh/LICENCES.md -> American names) — pr-opened-locally-verified (fork PR #1, closed) — do NOT re-pick; still present upstream but already attempted
 - `2026-09-09` trivial-fix pass (typos/broken links/stale commands) — pr-opened (fork PR #22, docs/fix-typos-and-broken-links) — 7 fixes across 4 files
 - `2026-09-30` packages/react score-select `aria-checked` frozen (a11y bug) — pr-opened (fork, fix/score-select-aria-checked) — do NOT re-pick
+- `2026-10-02` React `TabPanel` + vanilla `createTabs` panel `aria-labelledby` self-reference (a11y bug) — pr-opened (fork PR #30, fix/tabs-tabpanel-aria-labelledby) — do NOT re-pick
 
 ## Mined gaps (discovered, not yet attempted)
 - `2026-09-09` packages/react/README.md: "optinionated" -> "opinionated" (typo) — status: pr-opened
@@ -40,3 +42,4 @@
 - `2026-09-09` packages/design/theme-builder/README.md: "provides tool creating" -> "provides a tool for creating" — status: pr-opened
 - `2026-09-09` apps/docs/content/3-components/1-setup-guides/2-react.mdx: "if you interested" -> "if you are interested" — status: pr-opened
 - `2026-09-30` packages/react/src/score-select/score-select.tsx: hard-coded `aria-checked={value === option.value}` pins the attribute to the INITIAL prop, so after the user picks an option the internal ButtonGroup selection moves (visual highlight + selected class) but every radio keeps `aria-checked="false"` for assistive tech. Dropping the override lets ButtonGroupItem derive it from its own selected state. Verified: fails at upstream a140fcfd, passes after fix. — status: pr-opened
+- `2026-10-02` `packages/react/src/tabs/tab-panel.tsx` and `packages/html/ds/src/helpers/tabs.ts`: every `role="tabpanel"` rendered `aria-labelledby="tab-panel-<value>"` while its own `id` was `tab-panel-<value>`, so the panel referenced itself and had no accessible name. Expected `aria-labelledby="tab-<value>"` (the tab id). Repro: React `getByRole('tabpanel', { name: 'Tab 1' })` fails on main; `createTabs` panel attribute equals its own id. — status: pr-opened
