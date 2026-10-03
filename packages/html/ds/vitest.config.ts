@@ -60,7 +60,7 @@ export default mergeConfig(
           },
           plugins: [
             // The plugin will run tests for the stories defined in your Storybook config
-            // See options at: https://storybook.js.org/docs/writing-tests/vitest-plugin#storybooktest
+            // See options at: https://storybook.js.org/docs/writing-tests/integrations/vitest-addon#storybooktest
             storybookTest({ configDir: '.storybook' }),
           ],
         },
