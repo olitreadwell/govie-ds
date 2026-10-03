@@ -35,6 +35,7 @@
 - `2026-09-30` packages/react score-select `aria-checked` frozen (a11y bug) — pr-opened (fork, fix/score-select-aria-checked) — do NOT re-pick
 - `2026-10-02` React `TabPanel` + vanilla `createTabs` panel `aria-labelledby` self-reference (a11y bug) — pr-opened (fork PR #30, fix/tabs-tabpanel-aria-labelledby) — do NOT re-pick
 - `2026-10-03` `Details` content id hard-coded to `details-content` (React + vanilla helper), so multiple `Details` on a page share one id and React's `aria-controls`/`aria-details` resolve to the first instance — pr-opened (fork PR #31, fix/details-unique-content-id) — do NOT re-pick
+- `2026-10-04` trivial-fix pass (typos + dead links + stale commands) — pr-opened (fork PR #32, docs/fix-typos-links-and-stale-commands) — 10 fixes across 8 files; deliberately did NOT re-pick PR #22 or PR #1 items — do NOT re-pick that set
 
 ## Mined gaps (discovered, not yet attempted)
 - `2026-09-09` packages/react/README.md: "optinionated" -> "opinionated" (typo) — status: pr-opened
@@ -47,3 +48,11 @@
 - `2026-09-30` packages/react/src/score-select/score-select.tsx: hard-coded `aria-checked={value === option.value}` pins the attribute to the INITIAL prop, so after the user picks an option the internal ButtonGroup selection moves (visual highlight + selected class) but every radio keeps `aria-checked="false"` for assistive tech. Dropping the override lets ButtonGroupItem derive it from its own selected state. Verified: fails at upstream a140fcfd, passes after fix. — status: pr-opened
 - `2026-10-02` `packages/react/src/tabs/tab-panel.tsx` and `packages/html/ds/src/helpers/tabs.ts`: every `role="tabpanel"` rendered `aria-labelledby="tab-panel-<value>"` while its own `id` was `tab-panel-<value>`, so the panel referenced itself and had no accessible name. Expected `aria-labelledby="tab-<value>"` (the tab id). Repro: React `getByRole('tabpanel', { name: 'Tab 1' })` fails on main; `createTabs` panel attribute equals its own id. — status: pr-opened
 - `2026-10-03` `packages/react/src/details/details.tsx` + `packages/html/ds/src/helpers/details.ts`: the content div id was the literal `details-content`, so two `Details` on one page produced duplicate ids and the React `aria-controls`/`aria-details` references pointed at the first instance. Repro: render two `Details`; both content divs get `id="details-content"` and the unit test fails on `expected 'details-content' not to be 'details-content'`. Fix: per-instance id via `useDomId` / `generateRandomId`, and the vanilla module looks its content up by `.gi-details-text`. — status: pr-opened
+- `2026-10-04` packages/html/ds/src/toast/styles.css: comment spelling "overide" -> "override" (8x) — status: pr-opened (fork PR #32)
+- `2026-10-04` apps/docs/content/3-components/2-library/input-radio/design.mdx: preview value "radio-with-foucs" -> "radio-with-focus" — status: pr-opened (fork PR #32)
+- `2026-10-04` README.md: getting-started "pnpm ds" -> "pnpm docs" (root `ds` script removed/renamed to `docs`) — status: pr-opened (fork PR #32)
+- `2026-10-04` packages/design/figma/README.md: "pnpm figma:build" -> "pnpm --filter @ogcio/design-system-figma build" (root script removed with Nx) — status: pr-opened (fork PR #32)
+- `2026-10-04` packages/html/ds/README.md: "pnpm postbuild" -> "pnpm dist" (script renamed) — status: pr-opened (fork PR #32)
+- `2026-10-04` apps/docs/README.md: Nx tools deployment URL moved to gperdomor/oss with a new path — status: pr-opened (fork PR #32)
+- `2026-10-04` packages/react/vitest.config.ts + packages/html/ds/vitest.config.ts: Storybook Vitest docs URL moved to writing-tests/integrations/vitest-addon — status: pr-opened (fork PR #32)
+- `2026-10-04` NOT picked (dedupe/risk): popper.js.org/docs/v2/ 404s in popover docs (html + react) but no meaning-preserving replacement exists; PR #22 + PR #1 items still present upstream; CHANGELOG-generated typos (`Сontainer`, `accessbility`) left alone
