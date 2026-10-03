@@ -1,5 +1,5 @@
 # ogcio/govie-ds context
-> refreshed 2026-10-03 | upstream default: main @ a140fcfd
+> refreshed 2026-10-04 | upstream default: main @ a140fcfd
 
 ## Identity & policies
 - upstream: ogcio/govie-ds, default branch `main`, primary language TypeScript, English-first: yes (all docs/README in English)
@@ -27,6 +27,7 @@
 - Re-verified 2026-09-30: upstream has ZERO open issues (only 7 open PRs, all internal); no maintainer-engaged open issue → repo-audit path used
 - Re-verified 2026-10-02: still ZERO open issues and 7 open PRs (all internal) — no maintainer-engaged issue → repo-audit path used again
 - Re-verified 2026-10-03: still ZERO open issues and 7 open PRs (all internal) — no maintainer-engaged issue → repo-audit path used
+- Re-verified 2026-10-04: still ZERO open issues and 7 open PRs (all internal) — no maintainer-engaged issue → trivial-fix path used
 
 ## Gap ledger (dedupe — READ FIRST, never re-pick)
 - `2026-08-05` README license-report command names (gen:licences/licences.sh/LICENCES.md -> American names) — pr-opened-locally-verified (fork PR #1, closed) — do NOT re-pick; still present upstream but already attempted
