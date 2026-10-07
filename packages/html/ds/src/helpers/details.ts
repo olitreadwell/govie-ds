@@ -1,5 +1,6 @@
 import type { DetailsProps } from '../details/types';
 import { createIcon } from './icons';
+import { generateRandomId } from '.';
 
 export const createDetails = (arguments_: DetailsProps) => {
   const details = document.createElement('details');
@@ -29,7 +30,7 @@ export const createDetails = (arguments_: DetailsProps) => {
   summary.append(summaryText);
 
   const detailsContent = document.createElement('div');
-  detailsContent.id = 'details-content';
+  detailsContent.id = `details-content-${generateRandomId()}`;
   detailsContent.className = 'gi-details-text';
   detailsContent.ariaHidden = arguments_.open ? 'false' : 'true';
   detailsContent.textContent = arguments_.content || '';
