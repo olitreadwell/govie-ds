@@ -1,5 +1,5 @@
 # ogcio/govie-ds context
-> refreshed 2026-10-04 | upstream default: main @ a140fcfd
+> refreshed 2026-10-10 | upstream default: main @ c1a3ea80
 
 ## Identity & policies
 - upstream: ogcio/govie-ds, default branch `main`, primary language TypeScript, English-first: yes (all docs/README in English)
@@ -28,6 +28,7 @@
 - Re-verified 2026-10-02: still ZERO open issues and 7 open PRs (all internal) — no maintainer-engaged issue → repo-audit path used again
 - Re-verified 2026-10-03: still ZERO open issues and 7 open PRs (all internal) — no maintainer-engaged issue → repo-audit path used
 - Re-verified 2026-10-04: still ZERO open issues and 7 open PRs (all internal) — no maintainer-engaged issue → trivial-fix path used
+- Re-verified 2026-10-10: still ZERO open GitHub issues (the `open_issues_count` badge counts PRs); 6 open PRs, all internal/OGCIO → no maintainer-engaged issue → repo-audit path used. Fork `main` was 3 commits behind upstream, fast-forwarded via merge-upstream to c1a3ea80 before branching.
 
 ## Gap ledger (dedupe — READ FIRST, never re-pick)
 - `2026-08-05` README license-report command names (gen:licences/licences.sh/LICENCES.md -> American names) — pr-opened-locally-verified (fork PR #1, closed) — do NOT re-pick; still present upstream but already attempted
@@ -36,6 +37,7 @@
 - `2026-10-02` React `TabPanel` + vanilla `createTabs` panel `aria-labelledby` self-reference (a11y bug) — pr-opened (fork PR #30, fix/tabs-tabpanel-aria-labelledby) — do NOT re-pick
 - `2026-10-03` `Details` content id hard-coded to `details-content` (React + vanilla helper), so multiple `Details` on a page share one id and React's `aria-controls`/`aria-details` resolve to the first instance — pr-opened (fork PR #31, fix/details-unique-content-id) — do NOT re-pick
 - `2026-10-04` trivial-fix pass (typos + dead links + stale commands) — pr-opened (fork PR #32, docs/fix-typos-links-and-stale-commands) — 10 fixes across 8 files; deliberately did NOT re-pick PR #22 or PR #1 items — do NOT re-pick that set
+- `2026-10-10` React `AccordionItem` disclosure semantics (no button role / `aria-expanded` / `aria-controls`; panel `aria-labelledby` referenced a nonexistent `${label}-button` id, ids contained spaces) — pr-opened (fork, fix/accordion-disclosure-semantics) — do NOT re-pick
 
 ## Mined gaps (discovered, not yet attempted)
 - `2026-09-09` packages/react/README.md: "optinionated" -> "opinionated" (typo) — status: pr-opened
@@ -56,3 +58,5 @@
 - `2026-10-04` apps/docs/README.md: Nx tools deployment URL moved to gperdomor/oss with a new path — status: pr-opened (fork PR #32)
 - `2026-10-04` packages/react/vitest.config.ts + packages/html/ds/vitest.config.ts: Storybook Vitest docs URL moved to writing-tests/integrations/vitest-addon — status: pr-opened (fork PR #32)
 - `2026-10-04` NOT picked (dedupe/risk): popper.js.org/docs/v2/ 404s in popover docs (html + react) but no meaning-preserving replacement exists; PR #22 + PR #1 items still present upstream; CHANGELOG-generated typos (`Сontainer`, `accessbility`) left alone
+- `2026-10-10` accessibility packages/react/src/accordion/accordion-item.tsx: the disclosure header is a plain focusable `div` (no `role="button"`, no `aria-expanded`, no `aria-controls`), and the panel's `aria-labelledby` points at `${label}-button` — an id that no element has — so each `role="region"` panel has no accessible name. Repro at upstream c1a3ea80: render two `AccordionItem`s; `container.querySelectorAll('[id="First question-button"]')` is empty and axe reports `landmark-unique` ("The landmark must have a unique aria-label, aria-labelledby, or title"). Also `Space` was not handled (only `Enter`), and the `${label}`-derived ids contain spaces and collide across accordions with the same label. Fix: `useDomId()` for a unique header id, `role="button"` + `aria-expanded` + `aria-controls` + `aria-disabled` on the focusable header, panel `aria-labelledby` = header id, and `Space` handled. Repro/verify: `pnpm --filter @ogcio/design-system-react exec vitest run --project unit src/accordion/accordion-item.test.tsx` (5 tests fail on the old code, pass after; axe clean). Dedupe: `gh search prs/issues ogcio/govie-ds accordion` → zero upstream attempts (last accordion PR #974, chevron animation only) — status: pr-opened
+- `2026-10-10` audit notes, other dimensions (no pick this cycle): pre-existing `pnpm --filter @ogcio/design-system-react typecheck` errors in `tests/visual.spec.ts` (missing generated `storybook-static/index.json`) — reproduced on a clean stash, not ours; other `aria-labelledby`/`aria-controls` references checked (`header-slot.tsx` `SlotContainer-${index + 1}` off-by-one in the deprecated `HeaderLegacy`, `progress-stepper` index-based ids) — left for a later, separate PR
