@@ -4,6 +4,7 @@ import React, { useState, useRef } from 'react';
 import { tv } from 'tailwind-variants';
 import clsx from 'clsx';
 import KeyboardArrowDownIcon from '@/atoms/icons/KeyboardArrowDown';
+import { useDomId } from '@/hooks/use-dom-id.js';
 
 export type AccordionItemProps = {
   children: React.ReactNode;
@@ -20,16 +21,25 @@ export const AccordionItem = ({
   disabled,
   className,
   variant = 'default',
+  id,
   ...props
 }: AccordionItemProps) => {
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
   const ref = useRef<HTMLDivElement>(null);
-  const buttonId = `${label}-button`;
-  const panelId = `${label}-panel`;
+  const generatedId = useDomId();
+  const buttonId = id || generatedId;
+  const panelId = `${buttonId}-panel`;
+
+  const toggle = () => {
+    if (!disabled) {
+      setIsExpanded(!isExpanded);
+    }
+  };
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === 'Enter' && !disabled) {
-      setIsExpanded(!isExpanded);
+    if ((event.key === 'Enter' || event.key === ' ') && !disabled) {
+      event.preventDefault();
+      toggle();
     }
   };
   const { base, header, icon } = accordionVariants({ variant, disabled: !!disabled, isExpanded: !!isExpanded });
@@ -38,9 +48,14 @@ export const AccordionItem = ({
       <div
         {...props}
         ref={ref}
+        id={buttonId}
+        role="button"
+        aria-expanded={!!isExpanded}
+        aria-controls={panelId}
+        aria-disabled={disabled ? true : undefined}
         data-testid="accordion-item"
         data-disabled={!!disabled}
-        onClick={() => !disabled && setIsExpanded(!isExpanded)}
+        onClick={toggle}
         onKeyDown={handleKeyDown}
         tabIndex={0}
         className={clsx(base(), className)}
