@@ -54,7 +54,7 @@ This project includes the following packages that are publicly available on npm:
   platforms.
 - [`@ogcio/design-system-tailwind`](packages/design/tailwind/README.md) - A Tailwind CSS integration for the Government of Ireland Design
   System, providing utility-first styling options for rapid UI development.
-- [`@ogcio/theme-govie`](packages/themes/govie/README.md) - A theme package for the Government of Ireland Design System, providing
+- [`@ogcio/theme-govie`](packages/themes/govie/) - A theme package for the Government of Ireland Design System, providing
   predefined styles and components tailored for the Govie platform.
 
 ## Getting started
@@ -62,7 +62,7 @@ This project includes the following packages that are publicly available on npm:
 ```bash
 corepack enable
 pnpm install
-pnpm ds
+pnpm docs
 ```
 
 ## Scripts
