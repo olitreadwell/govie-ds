@@ -5,8 +5,7 @@ import { boxMeta } from './Box.meta';
 import { containerMeta } from './Container.meta';
 import { enumType } from './utilities';
 
-export const headerSectionMeta = {
-  tags: ['autodocs'] as string[],
+export const meta = {
   title: 'Layout/Header/HeaderSection',
   args: {
     children: 'Header section content',
@@ -52,7 +51,6 @@ export const headerSectionMeta = {
 };
 
 export const Default = {
-  args: headerSectionMeta.args,
   play: async ({ canvasElement, step, args }: StoryContext<Renderer>) => {
     const canvas = within(canvasElement as HTMLElement);
 
@@ -64,7 +62,6 @@ export const Default = {
 
 export const Utility = {
   args: {
-    ...headerSectionMeta.args,
     variant: SurfaceVariant.UTILITY,
     dataTestId: 'header-section-utility',
     id: 'header-section-utility-id',

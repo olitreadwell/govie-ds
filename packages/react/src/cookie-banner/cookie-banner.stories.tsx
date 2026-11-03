@@ -24,7 +24,7 @@ export const Default: Story = {
   argTypes: {
     children: {
       control: 'text',
-      description: 'The content that will be inserted the the default cookie banner',
+      description: 'The content that will be inserted into the default cookie banner',
     },
     cookieLink: {
       control: 'text',

@@ -1,0 +1,107 @@
+import { within, expect } from 'storybook/test';
+import { linkMeta } from './Link.meta';
+import { checker } from './utilities';
+import type { Props } from '../breadcrumbs/BreadcrumbLink.lite';
+import type { Meta, Story } from './types';
+
+// Args every framework passes to these stories: React drops `href` when `asChild` is set.
+type SharedArgs = Omit<Props, 'href'> & { href?: string };
+
+export const CURRENT_LINK_TEST_ID = 'breadcrumb-link-current';
+
+// Matches the icon breadcrumbs rendered by the WithIcons story in each framework.
+export const ICON_BREADCRUMB_LABELS = ['Go to Home page', 'Go to Settings page', 'Go to Accounts page'];
+
+export const meta = {
+  title: 'Navigation/Breadcrumbs/BreadcrumbLink',
+  args: {
+    href: '#',
+  },
+  argTypes: {
+    id: linkMeta.argTypes.id,
+    href: linkMeta.argTypes.href,
+    current: {
+      control: 'boolean',
+      description: 'Marks this item as the current page. Sets `aria-current="page"` and mutes the text colour.',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
+    },
+    ariaLabel: linkMeta.argTypes.ariaLabel,
+    dataTestId: linkMeta.argTypes.dataTestId,
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: 'A link for one level in a breadcrumb trail. Nest inside `Breadcrumbs`.',
+      },
+    },
+  },
+} satisfies Meta<Props>;
+
+export const Default = {} satisfies Story<SharedArgs>;
+
+export const CurrentLink = {
+  args: {
+    current: true,
+    dataTestId: CURRENT_LINK_TEST_ID,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Use `current` on the breadcrumb for the page the user is on. This sets `aria-current="page"` and mutes the text colour. The item remains a clickable link.',
+      },
+    },
+  },
+  play: async ({ canvasElement, step, args }) => {
+    const canvas = within(canvasElement as HTMLElement);
+    const check = checker(CURRENT_LINK_TEST_ID, canvas, step);
+
+    await check.is('a');
+    await check.attributes({ href: args.href, 'aria-current': 'page' });
+    await check.children();
+
+    await step('stays a focusable link', async () => {
+      const element = canvas.getByTestId(CURRENT_LINK_TEST_ID);
+      element.focus();
+      expect(element).toHaveFocus();
+      element.blur();
+    });
+  },
+} satisfies Story<SharedArgs>;
+
+export const WithIcons = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Children are not limited to text - pass icons or other elements. Provide `ariaLabel` when the visible content is not text, so the link still has an accessible name.',
+      },
+    },
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement as HTMLElement);
+
+    await step('renders a link for each level', async () => {
+      expect(canvas.getAllByRole('link')).toHaveLength(ICON_BREADCRUMB_LABELS.length);
+    });
+
+    for (const label of ICON_BREADCRUMB_LABELS) {
+      await step(`names the "${label}" link from its aria-label`, async () => {
+        const link = canvas.getByRole('link', { name: label });
+        expect(link).toHaveAttribute('aria-label', label);
+        expect(link.textContent?.trim()).toBe('');
+      });
+    }
+
+    await step('hides the icons themselves from assistive technology', async () => {
+      for (const link of canvas.getAllByRole('link')) {
+        const icon = link.querySelector('svg');
+        expect(icon).toBeInTheDocument();
+        expect(icon).toHaveAttribute('aria-hidden', 'true');
+      }
+    });
+  },
+} satisfies Story<SharedArgs>;

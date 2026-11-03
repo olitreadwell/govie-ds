@@ -7,4 +7,4 @@ pnpm dev
 
 ## Deployment
 
-- https://github.com/gperdomor/nx-tools/blob/main/plugins/nx-container/docs/advanced/push-multiple-registries.md
+- https://github.com/gperdomor/oss/blob/main/apps/website/content/docs/nx-container/guides/advanced/push-multiple-registries.mdx

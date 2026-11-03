@@ -12,7 +12,7 @@ Make token changes in `packages/design/tokens` or `packages/themes/<packagename>
 in [Design Token Format Module](https://design-tokens.github.io/community-group/format/) format.
 
 ```bash
-pnpm figma:build
+pnpm --filter @ogcio/design-system-figma build
 ```
 
 Figma tokens are outputted to `packages/design/figma/dist/tokens`.

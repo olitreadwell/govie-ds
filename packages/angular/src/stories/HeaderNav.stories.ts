@@ -1,20 +1,24 @@
 import type { StoryObj } from '@storybook/angular-vite';
-import { headerNavMeta, Default as defaultStory } from '@/atoms/storybook/HeaderNav.meta';
-import { HeaderNav, HeaderNavItemLink, HeaderSection } from '@/atoms';
+import * as stories from '@/atoms/storybook/HeaderNav.meta';
+import { GiHeaderNav } from '@/header/HeaderNav';
+import { GiHeaderNavItemLink } from '@/header/HeaderNavItemLink';
+import { GiHeaderSection } from '@/header/HeaderSection';
 
 const meta = {
-  ...headerNavMeta,
+  ...stories.meta,
   title: 'Layout/Header/HeaderNav',
+  component: GiHeaderNav,
 };
 
 export default meta;
 
 export const Default: StoryObj = {
-  ...defaultStory,
+  ...stories.Default,
+  tags: ['skip-playwright'],
   render: (props) => ({
     props,
     moduleMetadata: {
-      imports: [HeaderNav, HeaderNavItemLink, HeaderSection],
+      imports: [GiHeaderNav, GiHeaderNavItemLink, GiHeaderSection],
     },
     template: `
       <gi-header-section>

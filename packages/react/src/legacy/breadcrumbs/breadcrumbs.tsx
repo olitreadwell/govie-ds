@@ -1,0 +1,78 @@
+import ArrowLeftIcon from '@/atoms/icons/KeyboardArrowLeft';
+import { translate as t } from '@/i18n/utility.js';
+import { Link } from '@/link/link.js';
+import type { BreadcrumbLinkProps, BreadcrumbProps } from './types.js';
+import MoreHorizontal from '@/atoms/icons/MoreHorizontal';
+
+/**
+ * @deprecated Use `BreadcrumbEllipsis` from `@ogcio/design-system-react/next`
+ */
+export const BreadcrumbEllipsis = () => (
+  <div aria-hidden="true">
+    <MoreHorizontal className="gi-text-gray-700 gi-shrink-0" />
+  </div>
+);
+
+/**
+ * @deprecated Use `BreadcrumbLink` from `@ogcio/design-system-react/next`
+ */
+export const BreadcrumbLink = ({ href, children, asChild, ...ariaProps }: BreadcrumbLinkProps) => (
+  <Link
+    noColor
+    asChild={asChild}
+    href={href}
+    aria-label={`${children} page`}
+    size="sm"
+    className="gi-text-ellipsis gi-whitespace-nowrap gi-line-clamp-1"
+    {...ariaProps}
+  >
+    {children}
+  </Link>
+);
+
+/**
+ * @deprecated Use `BreadcrumbLink` with `current={true}` from `@ogcio/design-system-react/next`
+ */
+export const BreadcrumbCurrentLink = (props: BreadcrumbLinkProps) => <BreadcrumbLink {...props} aria-current="page" />;
+
+/**
+ * @deprecated This component is no longer necessary. Use the new Breadcrumb family exported from `@ogcio/design-system-react/next`
+ */
+const BreadcrumbSeparator = () => <span className="gi-px-3 gi-text-gray-500">/</span>;
+
+/**
+ * @deprecated Use `Breadcrumbs` from `@ogcio/design-system-react/next`
+ */
+export const Breadcrumbs = ({ children, iconStart }: BreadcrumbProps) => {
+  const items = Array.isArray(children) ? children : [children];
+
+  return (
+    <nav
+      aria-label={t('breadcrumbs.breadcrumbs', { defaultValue: 'Breadcrumbs' })}
+      className="gi-flex gi-items-center gi-gap-1"
+    >
+      <ol
+        role="list"
+        className="
+          gi-flex
+          gi-list-none
+          gi-flex-wrap
+          [&>li]:gi-flex
+          [&>li]:gi-items-center
+          "
+      >
+        {iconStart && (
+          <li role="listitem" className="gi-pr-1">
+            <ArrowLeftIcon className="gi-block gi-shrink-0" size={16} />
+          </li>
+        )}
+        {items.map((component, index) => (
+          <li className="gi-mx-0" role="listitem" key={`breadcrumb_item_${index}`}>
+            {component}
+            {index < items.length - 1 && <BreadcrumbSeparator />}
+          </li>
+        ))}
+      </ol>
+    </nav>
+  );
+};

@@ -1,5 +1,5 @@
-ARG NODE_IMAGE=docker.io/node:24.14.1-alpine3.23@sha256:01743339035a5c3c11a373cd7c83aeab6ed1457b55da6a69e014a95ac4e4700b
-ARG NGINX_IMAGE=docker.io/nginxinc/nginx-unprivileged:1-alpine3.23-slim@sha256:b5831ee7f7aa827cbae87df4a30a642f62c747d8525f5674365389f3adab278d
+ARG NODE_IMAGE=docker.io/node:24.22.1-alpine3.24@sha256:06d7adf3e0ef61a13f1d28682726366f97a15aa1888c934d3ecec86c33918b53
+ARG NGINX_IMAGE=docker.io/nginxinc/nginx-unprivileged:1-alpine3.24-slim@sha256:a8cb0f33d51fa107c96fd2bd3a71aaf564ec131e9d2bdf8700944f0ed8b170d7
 
 # Build image (run from root)
 FROM ${NODE_IMAGE} AS builder
@@ -12,6 +12,7 @@ COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
 COPY tsconfig.node.json tsconfig.bundler.json ./
 COPY apps/ ./apps
 COPY packages/ ./packages
+COPY examples/angular/ ./examples/angular
 COPY apps/docs/.env.${DEPLOY_ENV} ./apps/docs/.env.production
 
 ENV DEPLOY_ENV=${DEPLOY_ENV}
@@ -26,7 +27,9 @@ RUN corepack enable pnpm && \
       --filter "@ogcio/design-system-react^..." \
       --filter "@ogcio/design-system-angular^..." \
       --filter "@ogcio/design-system-vue^..." \
+      --filter "@ogcio/examples-angular^..." \
       run build && \
+    pnpm --filter @ogcio/examples-angular run build --base-href /examples/angular/ && \
     pnpm --filter @ogcio/design-system-html \
       --filter @ogcio/design-system-react \
       --filter @ogcio/design-system-angular \
@@ -43,6 +46,7 @@ COPY --from=builder --chown=nginx /build/packages/react/storybook-static /usr/sh
 COPY --from=builder --chown=nginx /build/packages/html/ds/storybook-static /usr/share/nginx/html/storybook-html
 COPY --from=builder --chown=nginx /build/packages/angular/storybook-static /usr/share/nginx/html/storybook-angular
 COPY --from=builder --chown=nginx /build/packages/vue/storybook-static /usr/share/nginx/html/storybook-vue
+COPY --from=builder --chown=nginx /build/examples/angular/dist/ogcio-demo/browser /usr/share/nginx/html/examples/angular
 
 # Copy nginx configuration
 COPY nginx.conf /etc/nginx/nginx.conf

@@ -37,7 +37,7 @@ Components live in `packages/core/atoms/<Component>.lite.tsx`. Each component de
 
 `.lite.tsx` is source for a generator, not code that runs, so several constructs compile cleanly for one target and break another. `eslint.config.js` bans the ones that can be caught statically; each rule's message explains the mechanism and the fix.
 
-Run `pnpm build:watch` while developing. The watcher regenerates the React and Angular outputs on every save, so the per-target shape evolves alongside the source. Generator plugins live in `packages/core/plugins/` (for example `strip-ref.ts`) and are wired through `react.config.ts` / `angular.config.ts`; reach for a plugin only when a generated output needs an across-the-board adjustment that the `.lite.tsx` source cannot express.
+Run `pnpm build:watch` while developing. The watcher regenerates the React and Angular outputs on every save, so the per-target shape evolves alongside the source. Generator plugins live in `packages/core/plugins/` (for example `strip-props.ts`) and are wired through `react.config.ts` / `angular.config.ts`; reach for a plugin only when a generated output needs an across-the-board adjustment that the `.lite.tsx` source cannot express.
 
 ### 2. Describe shared Storybook metadata
 

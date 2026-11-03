@@ -153,7 +153,6 @@ export const ScoreSelect: React.FC<ScoreSelectProps> = ({
               key={option.value}
               value={option.value}
               role="radio"
-              aria-checked={value === option.value}
               aria-label={`${option.label}${leftLabel && option.value === scoreOptions[0]?.value ? ` - ${leftLabel}` : ''}${rightLabel && option.value === scoreOptions.at(-1)?.value ? ` - ${rightLabel}` : ''}`}
             >
               {option.label}
