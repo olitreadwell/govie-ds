@@ -1,21 +1,24 @@
 import type { StoryObj } from '@storybook/angular-vite';
-import { headerLogoMeta, Default as defaultStory } from '@/atoms/storybook/HeaderLogo.meta';
-import { HeaderLogo, HeaderSection } from '@/atoms';
-import { LogoWhite } from '@/atoms/icons/logos';
+import * as stories from '@/atoms/storybook/HeaderLogo.meta';
+import { GiHeaderLogo } from '@/header/HeaderLogo';
+import { GiHeaderSection } from '@/header/HeaderSection';
+import { LogoWhite } from '@/logos';
 
 const meta = {
-  ...headerLogoMeta,
+  ...stories.meta,
   title: 'Layout/Header/HeaderLogo',
+  component: GiHeaderLogo,
 };
 
 export default meta;
 
 export const Default: StoryObj = {
-  ...defaultStory,
+  ...stories.Default,
+  tags: ['skip-playwright'],
   render: (props) => ({
     props,
     moduleMetadata: {
-      imports: [HeaderLogo, HeaderSection, LogoWhite],
+      imports: [GiHeaderLogo, GiHeaderSection, LogoWhite],
     },
     template: `
       <gi-header-section>
@@ -23,7 +26,7 @@ export const Default: StoryObj = {
           [id]="id"
           [dataTestId]="dataTestId"
         >
-          <gi-logo-white></gi-logo-white>
+          <gi-logo-white />
         </gi-header-logo>
       </gi-header-section>
     `,

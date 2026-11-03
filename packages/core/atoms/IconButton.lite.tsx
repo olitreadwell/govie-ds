@@ -1,9 +1,8 @@
-import { tv } from 'tailwind-variants';
 import { useDefaultProps, useMetadata } from '@builder.io/mitosis';
-import { baseClasses, getAppearance, getVariant } from './Button.styles';
+import { getAppearance, getVariant } from './Button.styles';
+import classes from './IconButton.styles';
 import type { Appearance, Variant } from './Button.styles';
-import { Size } from './constants';
-import type { ValueOf } from './constants';
+import type { Size, ValueOf } from './constants';
 import { getSize } from './utilities';
 
 export type Props = {
@@ -38,7 +37,7 @@ export type Props = {
   ref?: any;
 };
 
-useMetadata({ angular: { selector: 'gi-icon-button' } });
+useMetadata({ angular: { selector: 'core-icon-button' } });
 
 useDefaultProps({
   ariaPressed: undefined,
@@ -83,19 +82,3 @@ export default function IconButton(props: Props) {
     </button>
   );
 }
-
-const classes = tv({
-  extend: baseClasses,
-  base: ['gi-justify-center'],
-  variants: {
-    size: {
-      sm: 'gi-h-8 gi-w-8',
-      md: 'gi-h-10 gi-w-10',
-      lg: 'gi-h-12 gi-w-12',
-      xl: 'gi-h-14 gi-w-14',
-    },
-  },
-  defaultVariants: {
-    size: Size.MD,
-  },
-});

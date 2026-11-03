@@ -18,7 +18,7 @@ import type { Props as ButtonProps } from './Button';
 import type { Props as LinkProps } from './Link';
 
 @Component({
-  selector: 'gi-link-button',
+  selector: 'core-link-button',
   template: `
     <a
       [attr.id]="id"
@@ -48,8 +48,9 @@ import type { Props as LinkProps } from './Link';
       (keydown)="onKeyDown && this.onKeyDown.emit($event)"
       (keyup)="onKeyUp && this.onKeyUp.emit($event)"
       [attr.data-testid]="dataTestId"
-      ><ng-content></ng-content
-    ></a>
+    >
+      <ng-content></ng-content>
+    </a>
   `,
   styles: [
     `

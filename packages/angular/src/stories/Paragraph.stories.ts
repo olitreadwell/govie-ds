@@ -1,12 +1,15 @@
 import type { StoryObj } from '@storybook/angular-vite';
-import Paragraph from '../atoms/Paragraph';
+import { expect } from 'storybook/test';
+import { GiStack } from '@/Stack';
+import { GiParagraph, GiParagraphDirective } from '@/Paragraph';
+import { Size } from '@/atoms/constants';
 import {
   paragraphMeta,
   Default as defaultStory,
   AllParagraphSizes as allSizes,
   AllWhitespaces as allWhitespaces,
   AllAlignments as allAlignments,
-} from '../atoms/storybook/Paragraph.meta';
+} from '@/atoms/storybook/Paragraph.meta';
 
 const meta = {
   ...paragraphMeta,
@@ -17,13 +20,14 @@ export default meta;
 
 export const Default: StoryObj = {
   ...defaultStory,
+  tags: ['skip-playwright'],
   args: {
     ...defaultStory.args,
   },
   render: (args) => ({
     props: { ...args, content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
     moduleMetadata: {
-      imports: [Paragraph],
+      imports: [GiParagraph],
     },
     template: `
       <gi-paragraph [id]="id" [dataTestId]="dataTestId" [size]="size" [align]="align" [whitespace]="whitespace">{{content}}</gi-paragraph>
@@ -36,24 +40,34 @@ export const AllParagraphSizes: StoryObj = {
   render: (args) => ({
     props: args,
     moduleMetadata: {
-      imports: [Paragraph],
+      imports: [GiParagraph],
     },
     template: `
-    <gi-paragraph [dataTestId]="'paragraph-sm'" size="sm">Paragraph sm</gi-paragraph>
-    <gi-paragraph [dataTestId]="'paragraph-md'" size="md">Paragraph md</gi-paragraph>
-    <gi-paragraph [dataTestId]="'paragraph-lg'" size="lg">Paragraph lg</gi-paragraph>
-    <gi-paragraph [dataTestId]="'paragraph-xl'" size="xl">Paragraph xl</gi-paragraph>
+    <gi-paragraph id="paragraph-sm" [dataTestId]="'paragraph-sm'" size="sm">Paragraph sm</gi-paragraph>
+    <gi-paragraph id="paragraph-md" [dataTestId]="'paragraph-md'" size="md">Paragraph md</gi-paragraph>
+    <gi-paragraph id="paragraph-lg" [dataTestId]="'paragraph-lg'" size="lg">Paragraph lg</gi-paragraph>
+    <gi-paragraph id="paragraph-xl" [dataTestId]="'paragraph-xl'" size="xl">Paragraph xl</gi-paragraph>
     `,
   }),
+  play: async (context) => {
+    await allSizes.play(context);
+
+    await context.step('renders each static id once', async () => {
+      for (const size of Object.values(Size)) {
+        expect(context.canvasElement.querySelectorAll(`#paragraph-${size}`)).toHaveLength(1);
+      }
+    });
+  },
 };
 
 export const AllWhitespaces: StoryObj = {
   ...allWhitespaces,
+  tags: ['skip-playwright'],
   args: { content: paragraphMeta.loremIpsum },
   render: (args) => ({
     props: args,
     moduleMetadata: {
-      imports: [Paragraph],
+      imports: [GiParagraph],
     },
     template: `
       <div class="gi-flex gi-flex-col gi-gap-6">
@@ -80,11 +94,12 @@ export const AllWhitespaces: StoryObj = {
 
 export const AllAlignments: StoryObj = {
   ...allAlignments,
+  tags: ['skip-playwright'],
   args: { content: paragraphMeta.loremIpsum },
   render: (args) => ({
     props: args,
     moduleMetadata: {
-      imports: [Paragraph],
+      imports: [GiParagraph],
     },
     template: `
       <div class="gi-flex gi-flex-col gi-gap-6">
@@ -105,6 +120,27 @@ export const AllAlignments: StoryObj = {
           <gi-paragraph align="justify" [dataTestId]="'paragraph-align-justify'">{{content}}</gi-paragraph>
         </div>
       </div>
+    `,
+  }),
+};
+
+export const Directive: StoryObj = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Adds the `gi-paragraph` styling to a plain `p`, with the same sizes, alignment and whitespace handling.',
+      },
+    },
+  },
+  render: () => ({
+    props: { content: paragraphMeta.loremIpsum },
+    moduleMetadata: { imports: [GiStack, GiParagraphDirective] },
+    template: `
+      <gi-stack [gap]="2">
+        <p giParagraph size="sm">{{content}}</p>
+        <p giParagraph align="center">{{content}}</p>
+      </gi-stack>
     `,
   }),
 };

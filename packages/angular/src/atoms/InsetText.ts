@@ -17,13 +17,10 @@ export type Props = {
   labelledBy?: string;
 };
 
-import { tv } from 'tailwind-variants';
-const classes = tv({
-  base: 'gi-font-primary gi-p-4 gi-border-l-2xl gi-border-gray-500 gi-text-sm md:gi-text-md gi-not-prose',
-});
+import classes from './InsetText.styles';
 
 @Component({
-  selector: 'gi-inset-text',
+  selector: 'core-inset-text',
   template: `
     <blockquote
       [attr.id]="id"

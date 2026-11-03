@@ -14,7 +14,7 @@ export type Props = {
   ariaHidden?: boolean;
 };
 
-useMetadata({ angular: { selector: 'gi-text' } });
+useMetadata({ angular: { selector: 'core-text' } });
 
 useDefaultProps({
   ariaHidden: undefined,

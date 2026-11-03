@@ -34,15 +34,15 @@ The package includes a compiled stylesheet, so you do not need to configure Tail
 
 ## Usage
 
-All components are standalone and use the `gi-` selector prefix. Import them by name, add them to your component’s `imports` array and use their selectors in your template. For example, import `Container`, `H1` and `Paragraph`:
+All components are standalone and use the `gi-` selector prefix. Import them by name, add them to your component’s `imports` array and use their selectors in your template. For example, import `GiContainer`, `GiH1` and `GiParagraph`:
 
 ```ts
 import { Component } from '@angular/core';
-import { Container, H1, Paragraph } from '@ogcio/design-system-angular';
+import { GiContainer, GiH1, GiParagraph } from '@ogcio/design-system-angular';
 
 @Component({
   selector: 'app-root',
-  imports: [Container, H1, Paragraph],
+  imports: [GiContainer, GiH1, GiParagraph],
   template: `
     <gi-container>
       <gi-h1>Apply for a passport</gi-h1>
@@ -53,7 +53,7 @@ import { Container, H1, Paragraph } from '@ogcio/design-system-angular';
 export class AppComponent {}
 ```
 
-The package currently exports the layout primitives (`Box`, `Container`, `Grid`, `Stack`, `Divider`) and the typography components (`Text`, `Paragraph`, `InsetText`, `H1`–`H6`). Interactive and composite components are built but not yet exported while their Angular API is settled.
+The package currently exports the layout primitives (`GiBox`, `GiContainer`, `GiGrid`, `GiStack`, `GiDivider`) and the typography components (`GiText`, `GiParagraph`, `GiInsetText`, `GiH1`–`GiH6`). Interactive and composite components are built but not yet exported while their Angular API is settled.
 
 ### Icons
 
@@ -64,6 +64,16 @@ import { SearchIcon } from '@ogcio/design-system-angular/icons';
 ```
 
 Each icon accepts inputs including `size`, `color`, `className` and `label`. Set `label` to give the icon an accessible name; without a label, it is hidden from assistive technology. The full set of icons is catalogued on the [icons page](https://ds.services.gov.ie/resources/icons/).
+
+### Logos
+
+The Government of Ireland logos ship from the `/logos` subpath. For example, import `LogoGoldGreen` and use `<gi-logo-gold-green>`:
+
+```ts
+import { LogoGoldGreen } from '@ogcio/design-system-angular/logos';
+```
+
+Each logo accepts inputs including `size`, `className` and `label`. Set `label` to give the logo an accessible name; without a label, it is hidden from assistive technology. The logos are shown on the [logos page](https://ds.services.gov.ie/resources/logos/).
 
 ## Documentation
 

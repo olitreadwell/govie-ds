@@ -1,8 +1,8 @@
 import { useMetadata } from '@builder.io/mitosis';
 import { tv } from 'tailwind-variants';
-import GiBox from '../Box.lite';
+import CoreBox from '../Box.lite';
 
-useMetadata({ angular: { selector: 'gi-footer-logo' } });
+useMetadata({ angular: { selector: 'core-footer-logo' } });
 
 export type Props = {
   children?: any;
@@ -14,14 +14,14 @@ export type Props = {
 
 export default function FooterLogo(props: Props) {
   return (
-    <GiBox
+    <CoreBox
       id={props.id}
       className={classes({ className: props.className })}
       styles={props.styles}
       dataTestId={props.dataTestId}
     >
       {props.children}
-    </GiBox>
+    </CoreBox>
   );
 }
 

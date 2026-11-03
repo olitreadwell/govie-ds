@@ -3,10 +3,10 @@ import { tv } from 'tailwind-variants';
 import { clamp } from '../utilities';
 import { SurfaceVariant, SurfaceAppearance } from '../constants';
 import type { MaxWidth, ValueOf } from '../constants';
-import GiBox from '../Box.lite';
-import GiContainer from '../Container.lite';
+import CoreBox from '../Box.lite';
+import CoreContainer from '../Container.lite';
 
-useMetadata({ angular: { selector: 'gi-header-section' } });
+useMetadata({ angular: { selector: 'core-header-section' } });
 
 export type Props = {
   children?: any;
@@ -23,7 +23,7 @@ export type Props = {
 
 export default function HeaderSection(props: Props) {
   return (
-    <GiBox
+    <CoreBox
       id={props.id}
       className={classes({
         variant: getVariant(props.variant),
@@ -34,13 +34,13 @@ export default function HeaderSection(props: Props) {
       ariaLabel={props.ariaLabel}
       dataTestId={props.dataTestId}
     >
-      <GiContainer
+      <CoreContainer
         maxWidth={props.maxWidth}
         className={contentClasses({ variant: getVariant(props.variant), className: props.className })}
       >
         {props.children}
-      </GiContainer>
-    </GiBox>
+      </CoreContainer>
+    </CoreBox>
   );
 }
 

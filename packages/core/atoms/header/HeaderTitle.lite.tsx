@@ -1,8 +1,8 @@
 import { useMetadata } from '@builder.io/mitosis';
 import { tv } from 'tailwind-variants';
-import GiBox from '../Box.lite';
+import CoreBox from '../Box.lite';
 
-useMetadata({ angular: { selector: 'gi-header-title' } });
+useMetadata({ angular: { selector: 'core-header-title' } });
 
 export type Props = {
   children?: any;
@@ -14,14 +14,14 @@ export type Props = {
 
 export default function HeaderTitle(props: Props) {
   return (
-    <GiBox
+    <CoreBox
       id={props.id}
       className={classes({ className: props.className })}
       styles={props.styles}
       dataTestId={props.dataTestId}
     >
       {props.children}
-    </GiBox>
+    </CoreBox>
   );
 }
 

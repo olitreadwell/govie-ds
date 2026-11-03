@@ -13,7 +13,7 @@ import { getSize } from './styles';
 import type { Props } from './types';
 
 @Component({
-  selector: 'gi-h5',
+  selector: 'core-h5',
   template: `
     <h5
       [attr.id]="id"

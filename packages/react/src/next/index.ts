@@ -11,7 +11,7 @@ export { default as Header, type Props as HeaderProps } from '@/atoms/header/Hea
 export { default as HeaderSection, type Props as HeaderSectionProps } from '@/atoms/header/HeaderSection';
 export { default as HeaderLogo, type Props as HeaderLogoProps } from '@/atoms/header/HeaderLogo';
 export { default as HeaderNav, type Props as HeaderNavProps } from '@/atoms/header/HeaderNav';
-export { default as HeaderNavItem, type Props as HeaderNavItemProps } from '@/atoms/header/HeaderNavItem';
+export { default as HeaderNavItem, type HeaderNavItemProps } from '@/HeaderNavItem';
 export { default as HeaderNavItemLink, type HeaderNavItemLinkProps } from '@/HeaderNavItemLink';
 export { default as HeaderTitle, type Props as HeaderTitleProps } from '@/atoms/header/HeaderTitle';
 export {
@@ -25,3 +25,15 @@ export { default as SideNavItem, type Props as SideNavItemProps } from '@/atoms/
 export { default as SideNavItemLink, type SideNavItemLinkProps } from '@/SideNav/SideNavItemLink';
 export { default as SideNavHeading, type Props as SideNavHeadingProps } from '@/atoms/sidenav/SideNavHeading';
 export { default as SideNavGroup, type Props as SideNavGroupProps } from '@/atoms/sidenav/SideNavGroup';
+
+// Breadcrumbs
+export { default as Breadcrumbs, type BreadcrumbProps } from '@/breadcrumbs/Breadcrumbs';
+export { default as BreadcrumbLink, type BreadcrumbLinkProps } from '@/breadcrumbs/BreadcrumbLink';
+export { default as BreadcrumbEllipsis, type BreadcrumbEllipsisProps } from '@/breadcrumbs/BreadcrumbEllipsis';
+
+// Pagination
+export { default as Pagination, type PaginationProps } from '@/pagination/Pagination';
+export { default as PaginationLink, type PaginationLinkProps } from '@/pagination/PaginationLink';
+export { default as PaginationButton, type PaginationButtonProps } from '@/pagination/PaginationButton';
+export { default as PaginationEllipsis, type PaginationEllipsisProps } from '@/pagination/PaginationEllipsis';
+export { getPaginationList } from '@/atoms/pagination/utils';

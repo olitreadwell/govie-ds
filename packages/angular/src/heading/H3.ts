@@ -1,0 +1,45 @@
+import { Component, Directive, Input } from '@angular/core';
+import classes, { getSize } from '../atoms/heading/styles';
+import { Size, type Props } from '../atoms/heading/types';
+
+@Component({
+  selector: 'gi-h3',
+  standalone: true,
+  template: `
+    <h3 [class]="classes" [attr.style]="style" [attr.id]="id" [attr.data-testid]="dataTestId">
+      <ng-content></ng-content>
+    </h3>
+  `,
+  styles: [':host { display: contents; }'],
+  host: {
+    '[attr.id]': 'null',
+    '[attr.class]': 'null',
+    '[attr.style]': 'null',
+    '[attr.size]': 'null',
+    '[attr.datatestid]': 'null',
+  },
+})
+export class GiH3 {
+  @Input() class = '';
+  @Input() style?: string;
+  @Input() size: Props['size'];
+  @Input() id: Props['id'];
+  @Input() dataTestId: Props['dataTestId'];
+
+  get classes(): string {
+    return classes({ size: getSize(this.size, Size.MD), className: this.class });
+  }
+}
+
+@Directive({
+  selector: 'h3[giHeading]',
+  standalone: true,
+  host: { '[class]': 'classes' },
+})
+export class GiH3Directive {
+  @Input() size: Props['size'];
+
+  get classes(): string {
+    return classes({ size: getSize(this.size, Size.MD) });
+  }
+}

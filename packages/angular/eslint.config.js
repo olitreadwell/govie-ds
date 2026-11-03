@@ -5,7 +5,7 @@ import baseConfig from '../../eslint.config.mjs';
 
 export default defineConfig([
   {
-    ignores: ['**/storybook-static/**', '**/.angular/**'],
+    ignores: ['**/storybook-static/**', '**/.angular/**', '**/playwright-report/**', '**/test-results/**'],
   },
   ...baseConfig,
   {
@@ -17,6 +17,12 @@ export default defineConfig([
       '@angular-eslint/directive-selector': ['error', { type: 'attribute', prefix: 'gi', style: 'camelCase' }],
       // Mitosis generates generic output for React
       '@angular-eslint/no-output-on-prefix': 'off',
+    },
+  },
+  {
+    files: ['**/src/atoms/**/*.ts'],
+    rules: {
+      '@angular-eslint/component-selector': ['error', { type: 'element', prefix: ['gi', 'core'], style: 'kebab-case' }],
     },
   },
   {

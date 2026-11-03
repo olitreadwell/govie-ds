@@ -24,7 +24,7 @@ import { getSize, getWhitespace } from './utilities';
 import classes from './Text.styles';
 
 @Component({
-  selector: 'gi-text',
+  selector: 'core-text',
   template: `
     <span
       [class]="
@@ -38,8 +38,9 @@ import classes from './Text.styles';
       [ngStyle]="styles"
       [attr.data-testid]="dataTestId"
       [attr.aria-hidden]="ariaHidden"
-      ><ng-content></ng-content
-    ></span>
+    >
+      <ng-content></ng-content>
+    </span>
   `,
   styles: [
     `
