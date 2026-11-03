@@ -6,7 +6,7 @@ export function TabPanel({ value, children }: TabPanelProps) {
   return (
     <div
       role="tabpanel"
-      aria-labelledby={`tab-panel-${valueSlug}`}
+      aria-labelledby={`tab-${valueSlug}`}
       id={`tab-panel-${valueSlug}`}
       tabIndex={0}
       className="gi-hidden gi-basis-full gi-pt-2 focus-visible:gi-outline-none"

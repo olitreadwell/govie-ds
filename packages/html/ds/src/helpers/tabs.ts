@@ -109,7 +109,7 @@ export const createTabs = (arguments_: TabsProps) => {
 
       const tabPanel = document.createElement('div');
       tabPanel.setAttribute('role', 'tabpanel');
-      tabPanel.setAttribute('aria-labelledby', `tab-panel-${tabItem.id}`);
+      tabPanel.setAttribute('aria-labelledby', `tab-${tabItem.id}`);
       tabPanel.id = `tab-panel-${tabItem.id}`;
       tabPanel.tabIndex = 0;
       tabPanel.className = 'gi-tab-panel';
