@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { tv } from 'tailwind-variants';
 import clsx from 'clsx';
 import KeyboardArrowDownIcon from '@/atoms/icons/KeyboardArrowDown';
+import { useDomId } from '@/hooks/use-dom-id.js';
 
 export type DetailsProps = {
   label: string;
@@ -12,6 +13,7 @@ export type DetailsProps = {
 export const Details = ({ label, name, children, ...props }: DetailsProps) => {
   const detailsRef = useRef<HTMLDetailsElement>(null);
   const [isOpen, setIsOpen] = useState(false);
+  const contentId = useDomId();
 
   useEffect(() => {
     if (detailsRef.current?.open !== isOpen) {
@@ -32,14 +34,14 @@ export const Details = ({ label, name, children, ...props }: DetailsProps) => {
       data-module="gi-details"
       name={name}
       aria-expanded={isOpen ? 'true' : 'false'}
-      aria-details="details-content"
+      aria-details={contentId}
       {...props}
     >
       <summary
         className={summaryVariants()}
         role="button"
         data-testid="govie-details-summary"
-        aria-controls="details-content"
+        aria-controls={contentId}
         aria-expanded={isOpen ? 'true' : 'false'}
       >
         <KeyboardArrowDownIcon
@@ -50,7 +52,7 @@ export const Details = ({ label, name, children, ...props }: DetailsProps) => {
         <span className="gi-underline">{label}</span>
       </summary>
       <div
-        id="details-content"
+        id={contentId}
         className="gi-py-4 gi-pl-5 gi-border-l-[5px] gi-border-solid gi-border-l-gray-200"
         aria-hidden={isOpen ? 'false' : 'true'}
       >
