@@ -18,21 +18,8 @@ export const meta = {
   },
   argTypes: {
     id: boxMeta.argTypes.id,
-    className: iconsMeta.argTypes.className,
     size: iconsMeta.argTypes.size,
     color: iconsMeta.argTypes.color,
-    styles: {
-      control: {
-        disable: true,
-      },
-      description:
-        'Inline styles applied directly to the parent element of the icon. Use for truly dynamic values that cannot be expressed as Tailwind classes.',
-      table: {
-        type: {
-          summary: 'Record<string, string>',
-        },
-      },
-    },
     label: iconsMeta.argTypes.label,
     dataTestId: boxMeta.argTypes.dataTestId,
   },
@@ -40,7 +27,7 @@ export const meta = {
     docs: {
       description: {
         component:
-          'Use PaginationEllipsis to collapse the page range between the current item, and the first/last page. Renders a more-horizontal icon inside a list item. Leave `label` unset to keep the icon decorative and hidden from assistive technologies, or set it to announce the skipped range.',
+          'An ellipsis for Pagination. Use it in place of the pages skipped between the first or last page and the pages around the current page. It renders a more-horizontal icon. Leave `label` empty to keep the icon decorative and hidden from assistive technology, or set it to describe the skipped range.',
       },
     },
   },
@@ -52,7 +39,7 @@ export const Default = {
       const icon = canvas.getByTestId(ELLIPSIS_TESTID);
       expect(icon).toHaveAttribute('id', args.id);
       expect(icon).toHaveAttribute('aria-hidden', 'true');
-      expect(icon.parentElement?.tagName).toBe('LI');
+      expect(icon.closest('li')).toBeInTheDocument();
     });
   },
 } satisfies Story<Props>;
