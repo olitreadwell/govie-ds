@@ -16,15 +16,15 @@ export type Props = {
 };
 
 import { tv } from 'tailwind-variants';
-import GiBox from '../Box';
+import CoreBox from '../Box';
 const classes = tv({
   base: 'gi-flex gi-flex-none gi-rounded-sm',
 });
 
 @Component({
-  selector: 'gi-header-logo',
+  selector: 'core-header-logo',
   template: `
-    <gi-box
+    <core-box
       [id]="id"
       [className]="
         classes({
@@ -33,8 +33,9 @@ const classes = tv({
       "
       [styles]="styles"
       [dataTestId]="dataTestId"
-      ><ng-content></ng-content
-    ></gi-box>
+    >
+      <ng-content></ng-content>
+    </core-box>
   `,
   styles: [
     `
@@ -44,7 +45,7 @@ const classes = tv({
     `,
   ],
   standalone: true,
-  imports: [CommonModule, GiBox],
+  imports: [CommonModule, CoreBox],
 })
 export default class HeaderLogo {
   classes = classes;

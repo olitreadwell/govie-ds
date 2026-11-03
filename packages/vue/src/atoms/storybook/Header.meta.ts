@@ -9,8 +9,7 @@ import { within } from 'storybook/test';
 import type { Props } from '../header/Header.vue';
 import { boxMeta } from './Box.meta';
 import { checker } from './utilities';
-export const headerMeta = {
-  tags: ['autodocs'] as string[],
+export const meta = {
   title: 'Navigation/Header',
   args: {
     children: 'Header content',
@@ -59,7 +58,6 @@ export const headerMeta = {
 };
 export const Default = {
   args: {
-    ...headerMeta.args,
     dataTestId: 'header-default',
   },
   play: async ({ canvasElement, step, args }: StoryContext<Renderer>) => {

@@ -42,7 +42,7 @@ import type { Appearance, Underline, Variant, Visited } from './Link.styles';
 import type { ValueOf } from './constants';
 
 @Component({
-  selector: 'gi-link',
+  selector: 'core-link',
   template: `
     <a
       [attr.id]="id"
@@ -73,8 +73,9 @@ import type { ValueOf } from './constants';
       (keydown)="onKeyDown && this.onKeyDown.emit($event)"
       (keyup)="onKeyUp && this.onKeyUp.emit($event)"
       [attr.data-testid]="dataTestId"
-      ><ng-content></ng-content
-    ></a>
+    >
+      <ng-content></ng-content>
+    </a>
   `,
   styles: [
     `

@@ -7,8 +7,7 @@
 import type { StoryContext, Renderer } from 'storybook/internal/types';
 import { within, expect } from 'storybook/test';
 import { boxMeta } from './Box.meta';
-export const headerTitleMeta = {
-  tags: ['autodocs'] as string[],
+export const meta = {
   title: 'Layout/Header/HeaderTitle',
   args: {
     children: 'Title',
@@ -32,7 +31,6 @@ export const headerTitleMeta = {
   },
 };
 export const Default = {
-  args: headerTitleMeta.args,
   play: async ({ canvasElement, step, args }: StoryContext<Renderer>) => {
     const canvas = within(canvasElement as HTMLElement);
     await step('passes dataTestId through', async () => {

@@ -3,10 +3,10 @@ import { tv } from 'tailwind-variants';
 import { SurfaceVariant } from '../constants';
 import type { MaxWidth, ValueOf } from '../constants';
 import { clamp } from '../utilities';
-import GiBox from '../Box.lite';
-import GiContainer from '../Container.lite';
+import CoreBox from '../Box.lite';
+import CoreContainer from '../Container.lite';
 
-useMetadata({ angular: { selector: 'gi-footer-section' } });
+useMetadata({ angular: { selector: 'core-footer-section' } });
 
 export type Props = {
   variant?: ValueOf<typeof SurfaceVariant>;
@@ -20,19 +20,19 @@ export type Props = {
 
 export default function FooterSection(props: Props) {
   return (
-    <GiBox
+    <CoreBox
       id={props.id}
       className={classes({ variant: getVariant(props.variant) })}
       styles={props.styles}
       dataTestId={props.dataTestId}
     >
-      <GiContainer
+      <CoreContainer
         maxWidth={props.maxWidth}
         className={contentClasses({ variant: getVariant(props.variant), className: props.className })}
       >
         {props.children}
-      </GiContainer>
-    </GiBox>
+      </CoreContainer>
+    </CoreBox>
   );
 }
 

@@ -1,25 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import _ from 'lodash';
 import Info from '@/atoms/icons/Info';
-import {
-  iconButtonMeta,
-  Default as defaultStory,
-  InteractionStates as interactionStates,
-  Disabled as disabledStory,
-  AllVariants as allVariants,
-  AllAppearances as allAppearances,
-  AllSizes as allSizes,
-} from '@/atoms/storybook/IconButton.meta';
+import * as stories from '@/atoms/storybook/IconButton.meta';
 import { Variant, Appearance } from '@/atoms/Button.styles';
-import IconButton, { type Props } from '@/atoms/IconButton';
+import IconButton from '@/atoms/IconButton';
 import { Size } from '@/atoms/constants';
 
 const meta: Meta<typeof IconButton> = {
-  ...iconButtonMeta,
+  ...stories.meta,
   title: 'Components/IconButton',
   component: IconButton,
   argTypes: {
-    ...iconButtonMeta.argTypes,
+    ...stories.meta.argTypes,
     onClick: {
       control: false,
       description: 'Click event handler.',
@@ -69,7 +61,7 @@ const iconSizeForButton: Record<string, number> = {
 
 export const Default: Story = {
   tags: ['skip-playwright'],
-  ...defaultStory,
+  ...stories.Default,
   render: (props) => (
     <IconButton {...props}>
       <Info size={iconSizeForButton[props.size ?? Size.MD]} />
@@ -78,7 +70,7 @@ export const Default: Story = {
 };
 
 export const AllVariants: Story = {
-  ...allVariants,
+  ...stories.AllVariants,
   render: () => (
     <div className="gi-flex gi-gap-4">
       {_.map(Variant, (variant) => (
@@ -91,7 +83,7 @@ export const AllVariants: Story = {
 };
 
 export const AllAppearances: Story = {
-  ...allAppearances,
+  ...stories.AllAppearances,
   render: () => (
     <div className="gi-flex gi-gap-4">
       {_.map(Appearance, (appearance) => (
@@ -110,7 +102,7 @@ export const AllAppearances: Story = {
 };
 
 export const AllSizes: Story = {
-  ...allSizes,
+  ...stories.AllSizes,
   render: () => (
     <div className="gi-flex gi-items-center gi-gap-4">
       {_.map(Size, (size) => (
@@ -123,8 +115,8 @@ export const AllSizes: Story = {
 };
 
 export const Disabled: Story = {
-  ...disabledStory,
-  render: ({ onClick, onFocus }: Props) => (
+  ...stories.Disabled,
+  render: () => (
     <div className="gi-flex gi-flex-col gi-gap-4 gi-items-start">
       {_.map(Variant, (variant) =>
         _.map(Appearance, (appearance) => (
@@ -136,8 +128,6 @@ export const Disabled: Story = {
               variant={variant}
               appearance={appearance}
               disabled
-              onClick={onClick}
-              onFocus={onFocus}
               ariaLabel={`${variant} ${appearance} disabled`}
               dataTestId={`icon-button-disabled-${variant}-${appearance}`}
             >
@@ -169,7 +159,7 @@ export const Disabled: Story = {
 };
 
 export const InteractionStates: Story = {
-  ...interactionStates,
+  ...stories.InteractionStates,
   render: () => (
     <div className="gi-flex gi-flex-col gi-gap-2 gi-items-start">
       {_.map(Variant, (variant) =>
