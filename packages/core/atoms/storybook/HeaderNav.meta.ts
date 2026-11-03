@@ -3,8 +3,7 @@ import { within } from 'storybook/test';
 import { boxMeta } from './Box.meta';
 import { checker } from './utilities';
 
-export const headerNavMeta = {
-  tags: ['autodocs'] as string[],
+export const meta = {
   title: 'Layout/Header/HeaderNav',
   args: {
     children: 'Nav items',
@@ -36,7 +35,6 @@ export const headerNavMeta = {
 };
 
 export const Default = {
-  args: headerNavMeta.args,
   play: async ({ canvasElement, step, args }: StoryContext<Renderer>) => {
     const canvas = within(canvasElement as HTMLElement);
     const check = checker(args.dataTestId, canvas, step);

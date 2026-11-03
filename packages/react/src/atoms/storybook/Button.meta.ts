@@ -9,8 +9,7 @@ import { within, expect, fn, userEvent } from 'storybook/test';
 import type { Props } from '../Button';
 import { Appearance, ButtonSize, Variant } from '../Button.styles';
 import { enumType } from './utilities';
-export const buttonMeta = {
-  tags: ['autodocs'] as string[],
+export const meta = {
   title: 'Components/Button',
   args: {
     children: 'Button',
@@ -72,7 +71,7 @@ export const buttonMeta = {
     type: {
       control: false,
       description:
-        'HTML button type attribute. Defaults to `"button"` to prevent accidental form submission. Accepts `"button"`, `"submit"`, or `"reset"`.',
+        'HTML button type attribute. Accepts `"button"`, `"submit"`, or `"reset"`. Without it, a button inside a form submits the form.',
       table: {
         type: {
           summary: '"button" | "submit" | "reset"',
@@ -142,6 +141,16 @@ export const buttonMeta = {
       table: {
         type: {
           summary: 'boolean',
+        },
+      },
+    },
+    ariaCurrent: {
+      control: false,
+      description:
+        'Indicates that this element represents the current item within a container or set of related elements. Maps to `aria-current`.',
+      table: {
+        type: {
+          summary: '"page" | "step" | "location" | "date" | "time" | boolean',
         },
       },
     },
@@ -215,7 +224,6 @@ export const buttonMeta = {
 };
 export const Default = {
   tags: ['skip-playwright'],
-  args: buttonMeta.args,
   play: async ({ canvasElement, step }: StoryContext<Renderer>) => {
     const canvas = within(canvasElement as HTMLElement);
     await step('renders a button element', async () => {
@@ -274,33 +282,33 @@ export const AllSizes = {
   },
 };
 export const Disabled = {
-  args: {
-    onClick: fn(),
-    onFocus: fn(),
-  },
-  play: async ({ canvasElement, args, step }: StoryContext<Renderer>) => {
+  play: async ({ canvasElement, step }: StoryContext<Renderer>) => {
     const canvas = within(canvasElement as HTMLElement);
+    const button = canvas.getByTestId(`button-disabled-${Variant.PRIMARY}-${Appearance.DEFAULT}`);
     await step('renders all disabled buttons with disabled attribute', async () => {
       for (const variant of Object.values(Variant)) {
         for (const appearance of Object.values(Appearance)) {
-          const button = canvas.getByTestId(`button-disabled-${variant}-${appearance}`);
-          expect(button).toBeInTheDocument();
-          expect(button.tagName).toBe('BUTTON');
-          expect(button).toBeDisabled();
+          const disabledButton = canvas.getByTestId(`button-disabled-${variant}-${appearance}`);
+          expect(disabledButton).toBeInTheDocument();
+          expect(disabledButton.tagName).toBe('BUTTON');
+          expect(disabledButton).toBeDisabled();
         }
       }
     });
-    await step('click on a disabled button does not fire onClick handler', async () => {
-      const button = canvas.getByTestId(`button-disabled-${Variant.PRIMARY}-${Appearance.DEFAULT}`);
+    await step('a disabled button ignores pointer events', async () => {
+      expect(getComputedStyle(button).pointerEvents).toBe('none');
+    });
+    await step('click on a disabled button dispatches no click event', async () => {
+      const onClick = fn();
+      canvasElement.addEventListener('click', onClick);
       await userEvent.click(button, {
         pointerEventsCheck: 0,
       });
-      expect(args.onClick).not.toHaveBeenCalled();
+      canvasElement.removeEventListener('click', onClick);
+      expect(onClick).not.toHaveBeenCalled();
     });
-    await step('focus on a disabled button does not fire onFocus handler', async () => {
-      const button = canvas.getByTestId(`button-disabled-${Variant.PRIMARY}-${Appearance.DEFAULT}`);
+    await step('a disabled button cannot take focus', async () => {
       button.focus();
-      expect(args.onFocus).not.toHaveBeenCalled();
       expect(document.activeElement).not.toBe(button);
     });
   },

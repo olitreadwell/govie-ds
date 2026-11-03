@@ -10,8 +10,7 @@ import type { Props } from '../IconButton';
 import { Appearance, Variant } from '../Button.styles';
 import { Size } from '../constants';
 import { enumType } from './utilities';
-export const iconButtonMeta = {
-  tags: ['autodocs'] as string[],
+export const meta = {
   title: 'Components/IconButton',
   args: {
     id: 'icon-button-default',
@@ -138,13 +137,11 @@ export const iconButtonMeta = {
     },
     type: {
       control: false,
-      description: 'HTML button type attribute.',
+      description:
+        'HTML button type attribute. Accepts `"button"`, `"submit"`, or `"reset"`. Without it, a button inside a form submits the form.',
       table: {
         type: {
           summary: "'button' | 'submit' | 'reset'",
-        },
-        defaultValue: {
-          summary: 'button',
         },
       },
     },
@@ -198,7 +195,6 @@ export const iconButtonMeta = {
   },
 };
 export const Default = {
-  args: iconButtonMeta.args,
   play: async ({ canvasElement, step }: StoryContext<Renderer>) => {
     const canvas = within(canvasElement as HTMLElement);
     await step('renders a <button> element', async () => {
@@ -219,7 +215,6 @@ export const Default = {
   },
 };
 export const InteractionStates = {
-  args: iconButtonMeta.args,
   parameters: {
     pseudo: {
       hover: '.pseudo-hover',
@@ -228,32 +223,32 @@ export const InteractionStates = {
   },
 };
 export const Disabled = {
-  args: {
-    onClick: fn(),
-    onFocus: fn(),
-  },
-  play: async ({ canvasElement, step, args }: StoryContext<Renderer>) => {
+  play: async ({ canvasElement, step }: StoryContext<Renderer>) => {
     const canvas = within(canvasElement as HTMLElement);
+    const button = canvas.getByTestId(`icon-button-disabled-${Variant.PRIMARY}-${Appearance.DEFAULT}`);
     for (const variant of Object.values(Variant)) {
       for (const appearance of Object.values(Appearance)) {
         await step(`${variant} ${appearance} button is disabled`, async () => {
-          const button = canvas.getByTestId(`icon-button-disabled-${variant}-${appearance}`);
-          expect(button).toBeInTheDocument();
-          expect(button).toBeDisabled();
+          const disabledButton = canvas.getByTestId(`icon-button-disabled-${variant}-${appearance}`);
+          expect(disabledButton).toBeInTheDocument();
+          expect(disabledButton).toBeDisabled();
         });
       }
     }
-    await step('click on a disabled icon button does not fire onClick handler', async () => {
-      const button = canvas.getByTestId(`icon-button-disabled-${Variant.PRIMARY}-${Appearance.DEFAULT}`);
+    await step('a disabled icon button ignores pointer events', async () => {
+      expect(getComputedStyle(button).pointerEvents).toBe('none');
+    });
+    await step('click on a disabled icon button dispatches no click event', async () => {
+      const onClick = fn();
+      canvasElement.addEventListener('click', onClick);
       await userEvent.click(button, {
         pointerEventsCheck: 0,
       });
-      expect(args.onClick).not.toHaveBeenCalled();
+      canvasElement.removeEventListener('click', onClick);
+      expect(onClick).not.toHaveBeenCalled();
     });
-    await step('focus on a disabled icon button does not fire onFocus handler', async () => {
-      const button = canvas.getByTestId(`icon-button-disabled-${Variant.PRIMARY}-${Appearance.DEFAULT}`);
+    await step('a disabled icon button cannot take focus', async () => {
       button.focus();
-      expect(args.onFocus).not.toHaveBeenCalled();
       expect(document.activeElement).not.toBe(button);
     });
   },

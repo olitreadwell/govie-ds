@@ -1,33 +1,31 @@
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import type { StoryObj } from '@storybook/angular-vite';
 import { within, expect } from 'storybook/test';
-import { headerMeta, Default as defaultStory } from '@/atoms/storybook/Header.meta';
-import {
-  Header,
-  HeaderSection,
-  HeaderLogo,
-  HeaderTitle,
-  HeaderNav,
-  HeaderNavItem,
-  HeaderNavItemLink,
-  HeaderNavItemSeparator,
-  Link,
-  InfoIcon,
-  SearchIcon,
-  MicIcon,
-  LogoutIcon,
-  MenuIcon,
-} from '@/atoms';
+import * as stories from '@/atoms/storybook/Header.meta';
+import { InfoIcon, LogoutIcon, MenuIcon, MicIcon, SearchIcon } from '@/icons';
+import { GiBox } from '@/Box';
+import { GiHeader } from '@/header/Header';
+import { GiHeaderSection } from '@/header/HeaderSection';
+import { GiHeaderLogo } from '@/header/HeaderLogo';
+import { GiHeaderTitle } from '@/header/HeaderTitle';
+import { GiHeaderNav } from '@/header/HeaderNav';
+import { GiHeaderNavItemDirective } from '@/header/HeaderNavItem';
+import { GiHeaderNavItemButton, GiHeaderNavButtonDirective } from '@/header/HeaderNavItemButton';
+import { GiHeaderNavItemLink, GiHeaderNavLinkDirective } from '@/header/HeaderNavItemLink';
+import { GiHeaderNavItemSeparator } from '@/header/HeaderNavItemSeparator';
+import { GiLink, GiLinkDirective } from '@/Link';
 import { GiText } from '@/Text';
 import { GiStack } from '@/Stack';
 import { GiDivider } from '@/Divider';
-import { LogoBlack, LogoHarpBlack, LogoHarpWhite, LogoWhite } from '@/atoms/icons/logos';
+import { LogoBlack, LogoHarpBlack, LogoHarpWhite, LogoWhite } from '@/logos';
+import { withRouter } from '@/stories/router';
 
 const meta = {
-  ...headerMeta,
+  ...stories.meta,
   title: 'Layout/Header/Header',
-  component: Header,
+  component: GiHeader,
   parameters: {
-    ...headerMeta.parameters,
+    ...stories.meta.parameters,
     layout: 'fullscreen',
   },
 };
@@ -35,15 +33,15 @@ const meta = {
 export default meta;
 
 const headerImports = [
-  Header,
-  HeaderSection,
-  HeaderLogo,
-  HeaderTitle,
-  HeaderNav,
-  HeaderNavItem,
-  HeaderNavItemLink,
-  HeaderNavItemSeparator,
-  Link,
+  GiHeader,
+  GiHeaderSection,
+  GiHeaderLogo,
+  GiHeaderTitle,
+  GiHeaderNav,
+  GiHeaderNavItemButton,
+  GiHeaderNavItemLink,
+  GiHeaderNavItemSeparator,
+  GiLink,
   GiText,
   GiStack,
   GiDivider,
@@ -59,7 +57,7 @@ const headerImports = [
 ];
 
 export const Default: StoryObj = {
-  ...defaultStory,
+  ...stories.Default,
   parameters: {
     docs: {
       description: {
@@ -80,58 +78,47 @@ export const Default: StoryObj = {
         [dataTestId]="dataTestId"
       >
         <gi-header-section variant="utility">
-          <gi-header-nav ariaLabel="Utility navigation" className="gi-text-sm">
-            <gi-header-nav-item-link ariaLabel="Switch to Gaeilge" href="#">
-              Gaeilge
-            </gi-header-nav-item-link>
-            <gi-header-nav-item-link ariaLabel="Switch to English" href="#">
-              English
-            </gi-header-nav-item-link>
+          <gi-header-nav ariaLabel="Utility navigation" class="gi-text-sm">
+            <gi-header-nav-item-link href="#" ariaLabel="Switch to Gaeilge">Gaeilge</gi-header-nav-item-link>
+            <gi-header-nav-item-link href="#" ariaLabel="Switch to English">English</gi-header-nav-item-link>
           </gi-header-nav>
           <gi-stack direction="row" class="gi-text-center gi-items-center gi-py-1">
             <gi-text size="sm" class="gi-px-1">Hello Saoirse</gi-text>
-            <gi-divider orientation="vertical" class="gi-my-1 gi-mx-1"></gi-divider>
+            <gi-divider orientation="vertical" class="gi-my-1 gi-mx-1" />
             <gi-link
-              className="gi-py-1 gi-px-2 hover:gi-bg-black hover:gi-bg-opacity-20"
+              class="gi-py-1 gi-px-2 hover:gi-bg-black hover:gi-bg-opacity-20"
               href="#"
               appearance="light"
               ariaLabel="Log out"
             >
-              <gi-logout-icon [size]="16"></gi-logout-icon>
+              <gi-logout-icon [size]="16" />
             </gi-link>
           </gi-stack>
         </gi-header-section>
         <gi-header-section>
           <gi-header-logo>
             <gi-link appearance="light" href="#" ariaLabel="Gov.ie home">
-              <gi-logo-white [size]="132" className="gi-hidden md:gi-block"></gi-logo-white>
-              <gi-logo-harp-white [size]="32" className="gi-block md:gi-hidden"></gi-logo-harp-white>
+              <gi-logo-white [size]="132" className="gi-hidden md:gi-block" />
+              <gi-logo-harp-white [size]="32" className="gi-block md:gi-hidden" />
             </gi-link>
           </gi-header-logo>
           <gi-header-title>Title</gi-header-title>
           <gi-header-nav ariaLabel="Primary navigation">
-            <gi-header-nav-item-link visible="lg" href="#">
-              Departments
-            </gi-header-nav-item-link>
-            <gi-header-nav-item-link visible="lg" href="#">
-              Services
-            </gi-header-nav-item-link>
-            <gi-header-nav-item-separator visible="md"></gi-header-nav-item-separator>
-            <gi-header-nav-item visible="md">
-              FAQ <gi-info-icon></gi-info-icon>
-            </gi-header-nav-item>
-            <gi-header-nav-item visible="md">
-              Search
-              <gi-search-icon></gi-search-icon>
-            </gi-header-nav-item>
-            <gi-header-nav-item visible="md">
-              Language
-              <gi-mic-icon></gi-mic-icon>
-            </gi-header-nav-item>
-            <gi-header-nav-item [visible]="{ xs: true, md: false }">
-              Menu
-              <gi-menu-icon></gi-menu-icon>
-            </gi-header-nav-item>
+            <gi-header-nav-item-link visible="lg" href="#">Departments</gi-header-nav-item-link>
+            <gi-header-nav-item-link visible="lg" href="#">Services</gi-header-nav-item-link>
+            <gi-header-nav-item-separator visible="md" />
+            <gi-header-nav-item-button visible="md">
+              FAQ <gi-info-icon />
+            </gi-header-nav-item-button>
+            <gi-header-nav-item-button visible="md">
+              Search <gi-search-icon />
+            </gi-header-nav-item-button>
+            <gi-header-nav-item-button visible="md">
+              Language <gi-mic-icon />
+            </gi-header-nav-item-button>
+            <gi-header-nav-item-button [visible]="{ xs: true, md: false }">
+              Menu <gi-menu-icon />
+            </gi-header-nav-item-button>
           </gi-header-nav>
         </gi-header-section>
       </gi-header>
@@ -140,7 +127,7 @@ export const Default: StoryObj = {
 };
 
 export const Light: StoryObj = {
-  ...defaultStory,
+  ...stories.Default,
   parameters: {
     docs: {
       description: {
@@ -161,57 +148,46 @@ export const Light: StoryObj = {
         [dataTestId]="dataTestId"
       >
         <gi-header-section variant="utility" appearance="light">
-          <gi-header-nav ariaLabel="Utility navigation" className="gi-text-sm">
-            <gi-header-nav-item-link ariaLabel="Switch to Gaeilge" href="#">
-              Gaeilge
-            </gi-header-nav-item-link>
-            <gi-header-nav-item-link ariaLabel="Switch to English" href="#">
-              English
-            </gi-header-nav-item-link>
+          <gi-header-nav ariaLabel="Utility navigation" class="gi-text-sm">
+            <gi-header-nav-item-link href="#" ariaLabel="Switch to Gaeilge">Gaeilge</gi-header-nav-item-link>
+            <gi-header-nav-item-link href="#" ariaLabel="Switch to English">English</gi-header-nav-item-link>
           </gi-header-nav>
           <gi-stack direction="row" class="gi-text-center gi-items-center gi-py-1">
             <gi-text size="sm" class="gi-px-1">Hello Saoirse</gi-text>
-            <gi-divider orientation="vertical" class="gi-my-1 gi-mx-1"></gi-divider>
+            <gi-divider orientation="vertical" class="gi-my-1 gi-mx-1" />
             <gi-link
-              className="gi-py-1 gi-px-2 hover:gi-bg-black hover:gi-bg-opacity-10"
+              class="gi-py-1 gi-px-2 hover:gi-bg-black hover:gi-bg-opacity-10"
               href="#"
               ariaLabel="Log out"
             >
-              <gi-logout-icon [size]="16"></gi-logout-icon>
+              <gi-logout-icon [size]="16" />
             </gi-link>
           </gi-stack>
         </gi-header-section>
         <gi-header-section appearance="light">
           <gi-header-logo>
             <gi-link href="#" ariaLabel="Gov.ie home">
-              <gi-logo-black [size]="132" className="gi-hidden md:gi-block"></gi-logo-black>
-              <gi-logo-harp-black [size]="32" className="gi-block md:gi-hidden"></gi-logo-harp-black>
+              <gi-logo-black [size]="132" className="gi-hidden md:gi-block" />
+              <gi-logo-harp-black [size]="32" className="gi-block md:gi-hidden" />
             </gi-link>
           </gi-header-logo>
           <gi-header-title>Light Mode Title</gi-header-title>
           <gi-header-nav ariaLabel="Primary navigation">
-            <gi-header-nav-item-link visible="lg" href="#">
-              Departments
-            </gi-header-nav-item-link>
-            <gi-header-nav-item-link visible="lg" href="#">
-              Services
-            </gi-header-nav-item-link>
-            <gi-header-nav-item-separator visible="md"></gi-header-nav-item-separator>
-            <gi-header-nav-item visible="md">
-              FAQ <gi-info-icon></gi-info-icon>
-            </gi-header-nav-item>
-            <gi-header-nav-item visible="md">
-              Search
-              <gi-search-icon></gi-search-icon>
-            </gi-header-nav-item>
-            <gi-header-nav-item visible="md">
-              Language
-              <gi-mic-icon></gi-mic-icon>
-            </gi-header-nav-item>
-            <gi-header-nav-item [visible]="{ xs: true, md: false }">
-              Menu
-              <gi-menu-icon></gi-menu-icon>
-            </gi-header-nav-item>
+            <gi-header-nav-item-link visible="lg" href="#">Departments</gi-header-nav-item-link>
+            <gi-header-nav-item-link visible="lg" href="#">Services</gi-header-nav-item-link>
+            <gi-header-nav-item-separator visible="md" />
+            <gi-header-nav-item-button visible="md">
+              FAQ <gi-info-icon />
+            </gi-header-nav-item-button>
+            <gi-header-nav-item-button visible="md">
+              Search <gi-search-icon />
+            </gi-header-nav-item-button>
+            <gi-header-nav-item-button visible="md">
+              Language <gi-mic-icon />
+            </gi-header-nav-item-button>
+            <gi-header-nav-item-button [visible]="{ xs: true, md: false }">
+              Menu <gi-menu-icon />
+            </gi-header-nav-item-button>
           </gi-header-nav>
         </gi-header-section>
       </gi-header>
@@ -230,7 +206,7 @@ export const Light: StoryObj = {
 };
 
 export const TitleAndLogoAsLinks: StoryObj = {
-  ...defaultStory,
+  ...stories.Default,
   parameters: {
     docs: {
       description: {
@@ -251,10 +227,10 @@ export const TitleAndLogoAsLinks: StoryObj = {
         [id]="id"
         [dataTestId]="dataTestId"
       >
-        <gi-header-section className="!gi-justify-start">
+        <gi-header-section class="!gi-justify-start">
           <gi-header-logo>
             <gi-link href="#" appearance="light" ariaLabel="Gov.ie home">
-              <gi-logo-white [size]="132"></gi-logo-white>
+              <gi-logo-white [size]="132" />
             </gi-link>
           </gi-header-logo>
           <gi-header-title>
@@ -277,7 +253,7 @@ export const TitleAndLogoAsLinks: StoryObj = {
 };
 
 export const Desktop: StoryObj = {
-  ...defaultStory,
+  ...stories.Default,
   tags: ['skip-playwright'],
   parameters: {
     docs: {
@@ -314,48 +290,43 @@ export const Desktop: StoryObj = {
         [dataTestId]="dataTestId"
       >
         <gi-header-section variant="utility">
-          <gi-header-nav ariaLabel="Utility navigation" className="gi-text-sm">
-            <gi-header-nav-item-link ariaLabel="Switch to Gaeilge" href="#">
-              Gaeilge
-            </gi-header-nav-item-link>
-            <gi-header-nav-item-link ariaLabel="Switch to English" href="#">
-              English
-            </gi-header-nav-item-link>
+          <gi-header-nav ariaLabel="Utility navigation" class="gi-text-sm">
+            <gi-header-nav-item-link href="#" ariaLabel="Switch to Gaeilge">Gaeilge</gi-header-nav-item-link>
+            <gi-header-nav-item-link href="#" ariaLabel="Switch to English">English</gi-header-nav-item-link>
           </gi-header-nav>
           <gi-stack direction="row" class="gi-text-center gi-items-center gi-py-1">
             <gi-text size="sm" class="gi-px-1">Hello Saoirse</gi-text>
-            <gi-divider orientation="vertical" class="gi-my-1 gi-mx-1"></gi-divider>
-            <gi-header-nav-item-link
-              className="gi-py-1 gi-px-2 hover:gi-bg-black hover:gi-bg-opacity-20"
+            <gi-divider orientation="vertical" class="gi-my-1 gi-mx-1" />
+            <gi-link
+              class="gi-py-1 gi-px-2 hover:gi-bg-black hover:gi-bg-opacity-20"
               href="#"
+              appearance="light"
               ariaLabel="Log out"
             >
-              <gi-logout-icon [size]="16"></gi-logout-icon>
-            </gi-header-nav-item-link>
+              <gi-logout-icon [size]="16" />
+            </gi-link>
           </gi-stack>
         </gi-header-section>
         <gi-header-section>
           <gi-header-logo>
             <gi-link appearance="light" href="#" ariaLabel="Gov.ie home">
-              <gi-logo-white [size]="132"></gi-logo-white>
+              <gi-logo-white [size]="132" />
             </gi-link>
           </gi-header-logo>
           <gi-header-title>Title</gi-header-title>
           <gi-header-nav ariaLabel="Primary navigation">
             <gi-header-nav-item-link href="#">Departments</gi-header-nav-item-link>
             <gi-header-nav-item-link href="#">Services</gi-header-nav-item-link>
-            <gi-header-nav-item-separator></gi-header-nav-item-separator>
-            <gi-header-nav-item>
-              FAQ <gi-info-icon></gi-info-icon>
-            </gi-header-nav-item>
-            <gi-header-nav-item>
-              Search
-              <gi-search-icon></gi-search-icon>
-            </gi-header-nav-item>
-            <gi-header-nav-item>
-              Language
-              <gi-mic-icon></gi-mic-icon>
-            </gi-header-nav-item>
+            <gi-header-nav-item-separator />
+            <gi-header-nav-item-button>
+              FAQ <gi-info-icon />
+            </gi-header-nav-item-button>
+            <gi-header-nav-item-button>
+              Search <gi-search-icon />
+            </gi-header-nav-item-button>
+            <gi-header-nav-item-button>
+              Language <gi-mic-icon />
+            </gi-header-nav-item-button>
           </gi-header-nav>
         </gi-header-section>
       </gi-header>
@@ -374,7 +345,7 @@ export const Desktop: StoryObj = {
 };
 
 export const MobileView: StoryObj = {
-  ...defaultStory,
+  ...stories.Default,
   tags: ['skip-playwright'],
   parameters: {
     docs: {
@@ -416,38 +387,34 @@ export const MobileView: StoryObj = {
         [dataTestId]="dataTestId"
       >
         <gi-header-section variant="utility">
-          <gi-header-nav ariaLabel="Utility navigation" className="gi-text-sm">
-            <gi-header-nav-item-link ariaLabel="Switch to Gaeilge" href="#">
-              Gaeilge
-            </gi-header-nav-item-link>
-            <gi-header-nav-item-link ariaLabel="Switch to English" href="#">
-              English
-            </gi-header-nav-item-link>
+          <gi-header-nav ariaLabel="Utility navigation" class="gi-text-sm">
+            <gi-header-nav-item-link href="#" ariaLabel="Switch to Gaeilge">Gaeilge</gi-header-nav-item-link>
+            <gi-header-nav-item-link href="#" ariaLabel="Switch to English">English</gi-header-nav-item-link>
           </gi-header-nav>
           <gi-stack direction="row" class="gi-text-center gi-items-center gi-py-1">
             <gi-text size="sm" class="gi-px-1">Hello Saoirse</gi-text>
-            <gi-divider orientation="vertical" class="gi-my-1 gi-mx-1"></gi-divider>
+            <gi-divider orientation="vertical" class="gi-my-1 gi-mx-1" />
             <gi-link
-              className="gi-py-1 gi-px-2 hover:gi-bg-black hover:gi-bg-opacity-20"
+              class="gi-py-1 gi-px-2 hover:gi-bg-black hover:gi-bg-opacity-20"
               appearance="light"
               href="#"
               ariaLabel="Log out"
             >
-              <gi-logout-icon [size]="16"></gi-logout-icon>
+              <gi-logout-icon [size]="16" />
             </gi-link>
           </gi-stack>
         </gi-header-section>
         <gi-header-section>
           <gi-header-logo>
             <gi-link appearance="light" href="#" ariaLabel="Gov.ie home">
-              <gi-logo-harp-white className="gi-h-10"></gi-logo-harp-white>
+              <gi-logo-harp-white className="gi-h-10" />
             </gi-link>
           </gi-header-logo>
           <gi-header-title>Title</gi-header-title>
           <gi-header-nav ariaLabel="Primary navigation">
-            <gi-header-nav-item>
-              Menu <gi-menu-icon></gi-menu-icon>
-            </gi-header-nav-item>
+            <gi-header-nav-item-button>
+              Menu <gi-menu-icon />
+            </gi-header-nav-item-button>
           </gi-header-nav>
         </gi-header-section>
       </gi-header>
@@ -462,4 +429,87 @@ export const MobileView: StoryObj = {
       expect(canvas.getByRole('button', { name: /menu/i })).toBeInTheDocument();
     });
   },
+};
+
+export const WithRouter: StoryObj = {
+  ...stories.Default,
+  decorators: [withRouter(['', 'departments', 'services'])],
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Complete header with nav items built from native elements and wired to the Angular router. `routerLink` and `routerLinkActive` sit on the same `a giHeaderNavLink`, and the router marks the active link with `aria-current`.',
+      },
+    },
+  },
+  render: (props) => ({
+    props,
+    moduleMetadata: {
+      imports: [
+        GiHeader,
+        GiHeaderSection,
+        GiHeaderLogo,
+        GiHeaderTitle,
+        GiHeaderNav,
+        GiHeaderNavItemDirective,
+        GiHeaderNavLinkDirective,
+        GiHeaderNavButtonDirective,
+        GiHeaderNavItemSeparator,
+        GiBox,
+        GiLinkDirective,
+        LogoWhite,
+        InfoIcon,
+        SearchIcon,
+        MicIcon,
+        RouterLink,
+        RouterLinkActive,
+      ],
+    },
+    template: `
+      <gi-box class="gi-min-w-max">
+        <gi-header
+          [ariaLabel]="ariaLabel"
+          [id]="id"
+          [dataTestId]="dataTestId"
+        >
+          <gi-header-section variant="utility">
+            <gi-header-nav ariaLabel="Utility navigation" class="gi-text-sm">
+              <li giHeaderNavItem>
+                <a giHeaderNavLink routerLink="." [queryParams]="{ lang: 'ga' }" aria-label="Switch to Gaeilge">Gaeilge</a>
+              </li>
+              <li giHeaderNavItem>
+                <a giHeaderNavLink routerLink="." [queryParams]="{ lang: 'en' }" aria-label="Switch to English">English</a>
+              </li>
+            </gi-header-nav>
+          </gi-header-section>
+          <gi-header-section>
+            <gi-header-logo>
+              <a giLink appearance="light" routerLink="/" aria-label="Gov.ie home">
+                <gi-logo-white [size]="132" />
+              </a>
+            </gi-header-logo>
+            <gi-header-title>Title</gi-header-title>
+            <gi-header-nav ariaLabel="Primary navigation">
+              <li giHeaderNavItem>
+                <a giHeaderNavLink routerLink="/departments" routerLinkActive ariaCurrentWhenActive="page">Departments</a>
+              </li>
+              <li giHeaderNavItem>
+                <a giHeaderNavLink routerLink="/services" routerLinkActive ariaCurrentWhenActive="page">Services</a>
+              </li>
+              <gi-header-nav-item-separator />
+              <li giHeaderNavItem>
+                <button giHeaderNavButton type="button">FAQ <gi-info-icon /></button>
+              </li>
+              <li giHeaderNavItem>
+                <button giHeaderNavButton type="button">Search <gi-search-icon /></button>
+              </li>
+              <li giHeaderNavItem>
+                <button giHeaderNavButton type="button">Language <gi-mic-icon /></button>
+              </li>
+            </gi-header-nav>
+          </gi-header-section>
+        </gi-header>
+      </gi-box>
+    `,
+  }),
 };

@@ -47,7 +47,7 @@ export class Details extends BaseComponent<DetailsOptions> {
     this.detailsEl.ariaExpanded = isOpen.toString();
 
     const contentElement =
-      this.detailsEl.querySelector<HTMLElement>('#details-content');
+      this.detailsEl.querySelector<HTMLElement>('.gi-details-text');
     if (contentElement) {
       contentElement.ariaHidden = (!isOpen).toString();
     }

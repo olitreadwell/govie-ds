@@ -1,15 +1,12 @@
 import type { StoryContext, Renderer } from 'storybook/internal/types';
 import { within } from 'storybook/test';
-import { Size } from '../constants';
 import { linkMeta } from './Link.meta';
-import { checker, enumType } from './utilities';
+import { checker } from './utilities';
 
-export const headerNavItemLinkMeta = {
-  tags: ['autodocs'] as string[],
+export const meta = {
   title: 'Layout/Header/HeaderNavItemLink',
   args: {
     children: 'Departments',
-    visible: undefined,
     id: 'header-nav-item-link-id',
     href: '#',
     className: undefined,
@@ -24,20 +21,12 @@ export const headerNavItemLinkMeta = {
     ariaHidden: undefined,
     tabIndex: undefined,
     lang: undefined,
-    styles: undefined,
     dataTestId: 'header-nav-item-link',
     onClick: undefined,
     onKeyDown: undefined,
     onKeyUp: undefined,
   },
   argTypes: {
-    visible: {
-      ...enumType(Size, {
-        description:
-          'Visibility: `true`/`false`, a breakpoint to show from (e.g. `"lg"`), or a per-breakpoint map like `{ base: false, lg: true }`.',
-      }),
-      control: 'select' as const,
-    },
     id: linkMeta.argTypes.id,
     href: linkMeta.argTypes.href,
     className: linkMeta.argTypes.className,
@@ -52,7 +41,6 @@ export const headerNavItemLinkMeta = {
     ariaHidden: linkMeta.argTypes.ariaHidden,
     tabIndex: linkMeta.argTypes.tabIndex,
     lang: linkMeta.argTypes.lang,
-    styles: linkMeta.argTypes.styles,
     dataTestId: linkMeta.argTypes.dataTestId,
     onClick: {
       action: 'clicked',
@@ -73,15 +61,13 @@ export const headerNavItemLinkMeta = {
   parameters: {
     docs: {
       description: {
-        component:
-          'Link-style navigation item for header menus. Renders an anchor in a list item with header-specific styling and visibility controls.',
+        component: 'Link for a header navigation item, with header-specific styling. Use to navigate to a URL.',
       },
     },
   },
 };
 
 export const Default = {
-  args: headerNavItemLinkMeta.args,
   play: async ({ canvasElement, step, args }: StoryContext<Renderer>) => {
     const canvas = within(canvasElement as HTMLElement);
     const check = checker(args.dataTestId, canvas, step);
