@@ -5,7 +5,7 @@
 -->
 
 <template>
-  <GiBox
+  <CoreBox
     :id="id"
     :className="
       classes({
@@ -14,7 +14,7 @@
     "
     :styles="styles"
     :dataTestId="dataTestId"
-    ><GiContainer
+    ><CoreContainer
       :maxWidth="maxWidth"
       :className="
         contentClasses({
@@ -22,8 +22,8 @@
           className: className,
         })
       "
-      ><slot /></GiContainer
-  ></GiBox>
+      ><slot /></CoreContainer
+  ></CoreBox>
 </template>
 
 <script setup lang="ts">
@@ -31,8 +31,8 @@ import { tv } from 'tailwind-variants';
 import { SurfaceVariant } from '../constants';
 import type { MaxWidth, ValueOf } from '../constants';
 import { clamp } from '../utilities';
-import GiBox from '../Box.vue';
-import GiContainer from '../Container.vue';
+import CoreBox from '../Box.vue';
+import CoreContainer from '../Container.vue';
 const getVariant = (x: Props['variant']) => clamp(x, SurfaceVariant, SurfaceVariant.PRIMARY);
 const classes = tv({
   base: 'gi-footer-section gi-w-full',

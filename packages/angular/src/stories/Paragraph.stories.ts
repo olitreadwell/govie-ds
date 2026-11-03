@@ -1,6 +1,8 @@
 import type { StoryObj } from '@storybook/angular-vite';
-import Stack from '@/atoms/Stack';
+import { expect } from 'storybook/test';
+import { GiStack } from '@/Stack';
 import { GiParagraph, GiParagraphDirective } from '@/Paragraph';
+import { Size } from '@/atoms/constants';
 import {
   paragraphMeta,
   Default as defaultStory,
@@ -18,6 +20,7 @@ export default meta;
 
 export const Default: StoryObj = {
   ...defaultStory,
+  tags: ['skip-playwright'],
   args: {
     ...defaultStory.args,
   },
@@ -40,16 +43,26 @@ export const AllParagraphSizes: StoryObj = {
       imports: [GiParagraph],
     },
     template: `
-    <gi-paragraph [dataTestId]="'paragraph-sm'" size="sm">Paragraph sm</gi-paragraph>
-    <gi-paragraph [dataTestId]="'paragraph-md'" size="md">Paragraph md</gi-paragraph>
-    <gi-paragraph [dataTestId]="'paragraph-lg'" size="lg">Paragraph lg</gi-paragraph>
-    <gi-paragraph [dataTestId]="'paragraph-xl'" size="xl">Paragraph xl</gi-paragraph>
+    <gi-paragraph id="paragraph-sm" [dataTestId]="'paragraph-sm'" size="sm">Paragraph sm</gi-paragraph>
+    <gi-paragraph id="paragraph-md" [dataTestId]="'paragraph-md'" size="md">Paragraph md</gi-paragraph>
+    <gi-paragraph id="paragraph-lg" [dataTestId]="'paragraph-lg'" size="lg">Paragraph lg</gi-paragraph>
+    <gi-paragraph id="paragraph-xl" [dataTestId]="'paragraph-xl'" size="xl">Paragraph xl</gi-paragraph>
     `,
   }),
+  play: async (context) => {
+    await allSizes.play(context);
+
+    await context.step('renders each static id once', async () => {
+      for (const size of Object.values(Size)) {
+        expect(context.canvasElement.querySelectorAll(`#paragraph-${size}`)).toHaveLength(1);
+      }
+    });
+  },
 };
 
 export const AllWhitespaces: StoryObj = {
   ...allWhitespaces,
+  tags: ['skip-playwright'],
   args: { content: paragraphMeta.loremIpsum },
   render: (args) => ({
     props: args,
@@ -81,6 +94,7 @@ export const AllWhitespaces: StoryObj = {
 
 export const AllAlignments: StoryObj = {
   ...allAlignments,
+  tags: ['skip-playwright'],
   args: { content: paragraphMeta.loremIpsum },
   render: (args) => ({
     props: args,
@@ -121,7 +135,7 @@ export const Directive: StoryObj = {
   },
   render: () => ({
     props: { content: paragraphMeta.loremIpsum },
-    moduleMetadata: { imports: [Stack, GiParagraphDirective] },
+    moduleMetadata: { imports: [GiStack, GiParagraphDirective] },
     template: `
       <gi-stack [gap]="2">
         <p giParagraph size="sm">{{content}}</p>

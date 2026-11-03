@@ -17,7 +17,7 @@ Package that contains the components and the styles of the <strong>HTML global c
 | `pnpm build:properties`       | Generate properties from the components schemas to ensure validation                         |
 | `pnpm build:ts`               | Compiles, builds and optimises the components in a production ready state                    |
 | `pnpm build:styles`           | Compiles, minifies and moves the tailwind styles in the ``dist`` folder                      |
-| `pnpm postbuild`              | Archives the ``dist`` folder into a ``govie-frontend.zip`` file               |
+| `pnpm dist`                   | Archives the ``dist`` folder into a ``govie-frontend.zip`` file               |
 
 
 ## Storybook
@@ -34,5 +34,5 @@ Package that contains the storybook for the HTML global components
 
 | Script                 | Description                                               |
 | ---------------------- | ----------------------------------------------------------|
-| `pnpm dev`             | Compiles and serves a development build of your Storybook |
-| `pnpm build`           | Compiles your Storybook instance so it can be deployed    |
+| `pnpm storybook:dev`   | Compiles and serves a development build of your Storybook |
+| `pnpm storybook:build` | Compiles your Storybook instance so it can be deployed    |

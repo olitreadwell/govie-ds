@@ -23,8 +23,8 @@ import { tv } from 'tailwind-variants';
 import { clamp } from '../utilities';
 import { SurfaceVariant, SurfaceAppearance } from '../constants';
 import type { MaxWidth, ValueOf } from '../constants';
-import GiBox from '../Box';
-import GiContainer from '../Container';
+import CoreBox from '../Box';
+import CoreContainer from '../Container';
 const getVariant = (x: Props['variant']) => clamp(x, SurfaceVariant, SurfaceVariant.PRIMARY);
 const getAppearance = (x: Props['appearance']) => clamp(x, SurfaceAppearance, SurfaceAppearance.DEFAULT);
 const classes = tv({
@@ -82,7 +82,7 @@ const contentClasses = tv({
 
 function HeaderSection(props: Props) {
   return (
-    <GiBox
+    <CoreBox
       id={props.id}
       className={classes({
         variant: getVariant(props.variant),
@@ -93,7 +93,7 @@ function HeaderSection(props: Props) {
       ariaLabel={props.ariaLabel}
       dataTestId={props.dataTestId}
     >
-      <GiContainer
+      <CoreContainer
         maxWidth={props.maxWidth}
         className={contentClasses({
           variant: getVariant(props.variant),
@@ -101,8 +101,8 @@ function HeaderSection(props: Props) {
         })}
       >
         {props.children}
-      </GiContainer>
-    </GiBox>
+      </CoreContainer>
+    </CoreBox>
   );
 }
 

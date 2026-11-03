@@ -24,8 +24,8 @@ import { tv } from 'tailwind-variants';
 import { clamp } from '../utilities';
 import { SurfaceVariant, SurfaceAppearance } from '../constants';
 import type { MaxWidth, ValueOf } from '../constants';
-import GiBox from '../Box';
-import GiContainer from '../Container';
+import CoreBox from '../Box';
+import CoreContainer from '../Container';
 const getVariant = (x: Props['variant']) => clamp(x, SurfaceVariant, SurfaceVariant.PRIMARY);
 const getAppearance = (x: Props['appearance']) => clamp(x, SurfaceAppearance, SurfaceAppearance.DEFAULT);
 const classes = tv({
@@ -82,9 +82,9 @@ const contentClasses = tv({
 });
 
 @Component({
-  selector: 'gi-header-section',
+  selector: 'core-header-section',
   template: `
-    <gi-box
+    <core-box
       [id]="id"
       [className]="
         classes({
@@ -96,7 +96,8 @@ const contentClasses = tv({
       [role]="role"
       [ariaLabel]="ariaLabel"
       [dataTestId]="dataTestId"
-      ><gi-container
+    >
+      <core-container
         [maxWidth]="maxWidth"
         [className]="
           contentClasses({
@@ -104,8 +105,10 @@ const contentClasses = tv({
             className: className,
           })
         "
-        ><ng-content></ng-content></gi-container
-    ></gi-box>
+      >
+        <ng-content></ng-content>
+      </core-container>
+    </core-box>
   `,
   styles: [
     `
@@ -115,7 +118,7 @@ const contentClasses = tv({
     `,
   ],
   standalone: true,
-  imports: [CommonModule, GiBox, GiContainer],
+  imports: [CommonModule, CoreBox, CoreContainer],
 })
 export default class HeaderSection {
   getVariant = getVariant;

@@ -6,8 +6,13 @@ export { alertVariants } from './alert/variants.js';
 export { Autocomplete, AutocompleteItem } from './autocomplete/autocomplete.js';
 export type { AutocompleteItemProps, AutocompleteProps } from './autocomplete/types.js';
 export { Blockquote, type BlockquoteProps } from './blockquote/blockquote.js';
-export { BreadcrumbCurrentLink, BreadcrumbEllipsis, BreadcrumbLink, Breadcrumbs } from './breadcrumbs/breadcrumbs.js';
-export { type BreadcrumbLinkProps, type BreadcrumbProps } from './breadcrumbs/types.js';
+export {
+  BreadcrumbCurrentLink,
+  BreadcrumbEllipsis,
+  BreadcrumbLink,
+  Breadcrumbs,
+} from './legacy/breadcrumbs/breadcrumbs.js';
+export { type BreadcrumbLinkProps, type BreadcrumbProps } from './legacy/breadcrumbs/types.js';
 export { ButtonGroup, ButtonGroupItem } from './button-group/button-group.js';
 export * from './button-group/types.js';
 export { Button } from './button/button.js';
@@ -92,7 +97,7 @@ export { ListItem, type ListItemProps } from './list-item/list-item.js';
 export { List, type ListProps } from './list/list.js';
 export { Modal, ModalBody, ModalFooter, ModalTitle, ModalWrapper } from './modal/modal.js';
 export type * from './modal/types.js';
-export { Pagination, type PaginationProps } from './pagination/pagination.js';
+export { Pagination, type PaginationProps } from './pagination/pagination-composed.js';
 export { Paragraph, type ParagraphProps } from './paragraph/paragraph.js';
 export { PhaseBanner, type PhaseBannerProps } from './phase-banner/phase-banner.js';
 export { Popover } from './popover/popover.js';

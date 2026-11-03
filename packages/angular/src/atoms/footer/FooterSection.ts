@@ -21,8 +21,8 @@ import { tv } from 'tailwind-variants';
 import { SurfaceVariant } from '../constants';
 import type { MaxWidth, ValueOf } from '../constants';
 import { clamp } from '../utilities';
-import GiBox from '../Box';
-import GiContainer from '../Container';
+import CoreBox from '../Box';
+import CoreContainer from '../Container';
 const getVariant = (x: Props['variant']) => clamp(x, SurfaceVariant, SurfaceVariant.PRIMARY);
 const classes = tv({
   base: 'gi-footer-section gi-w-full',
@@ -50,9 +50,9 @@ const contentClasses = tv({
 });
 
 @Component({
-  selector: 'gi-footer-section',
+  selector: 'core-footer-section',
   template: `
-    <gi-box
+    <core-box
       [id]="id"
       [className]="
         classes({
@@ -61,7 +61,8 @@ const contentClasses = tv({
       "
       [styles]="styles"
       [dataTestId]="dataTestId"
-      ><gi-container
+    >
+      <core-container
         [maxWidth]="maxWidth"
         [className]="
           contentClasses({
@@ -69,8 +70,10 @@ const contentClasses = tv({
             className: className,
           })
         "
-        ><ng-content></ng-content></gi-container
-    ></gi-box>
+      >
+        <ng-content></ng-content>
+      </core-container>
+    </core-box>
   `,
   styles: [
     `
@@ -80,7 +83,7 @@ const contentClasses = tv({
     `,
   ],
   standalone: true,
-  imports: [CommonModule, GiBox, GiContainer],
+  imports: [CommonModule, CoreBox, CoreContainer],
 })
 export default class FooterSection {
   getVariant = getVariant;

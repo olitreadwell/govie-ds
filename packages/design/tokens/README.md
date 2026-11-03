@@ -123,7 +123,7 @@ Screen tokens define responsive breakpoints (`xs`, `sm`, `md`, `lg`, `xl`) for c
 
 ## Build Process
 
-The build script (`scripts/build.ts`) transforms JSON token definitions into multiple output formats using [`@ogcio/design-system-tokens-builder`](../theme-builder/README.md). It generates TypeScript files for both resolved and unresolved token trees, camelCase constant exports, and CSS variable objects. The package uses a two-stage build: first tokens are generated, then source files are compiled with tsup. Run the build with:
+The build script (`scripts/build.ts`) transforms JSON token definitions into multiple output formats using [`@ogcio/design-system-tokens-builder`](../tokens-builder/README.md). It generates TypeScript files for both resolved and unresolved token trees, camelCase constant exports, and CSS variable objects. The package uses a two-stage build: first tokens are generated, then source files are compiled with tsup. Run the build with:
 
 ```bash
 pnpm build

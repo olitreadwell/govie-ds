@@ -1,5 +1,68 @@
 # Changelog
 
+## [0.5.0](https://github.com/ogcio/govie-ds/compare/angular-v0.4.0...angular-v0.5.0) (2026-10-20)
+
+
+### Features
+
+* **AB#39577:** implement Pagination atoms in core ([2b09518](https://github.com/ogcio/govie-ds/commit/2b09518f192fa97f95ad9ff4e73b8f6d7d7ad3c7))
+* **AB#41725:** add breadcrumb family to react storybook ([7f1b416](https://github.com/ogcio/govie-ds/commit/7f1b416fc4da41b4cbdeef823bc69d6fe8e3e4e2))
+* **AB#44010:** add Angular Button wrapper and directive ([bbfbe15](https://github.com/ogcio/govie-ds/commit/bbfbe158f3862970b92e65af2cb53610f3dfb437))
+* **AB#44010:** add Angular IconButton wrapper and directive ([9e396b7](https://github.com/ogcio/govie-ds/commit/9e396b7bb395c02316e74ee7189000761e1e2845))
+* **AB#44010:** add Angular Link wrapper and directive ([b60add2](https://github.com/ogcio/govie-ds/commit/b60add2becd1e33b19468dbcd02fdf2f6138e310))
+* **AB#44010:** add Angular LinkButton wrapper and directive ([ffcc56c](https://github.com/ogcio/govie-ds/commit/ffcc56ce358c4a5c5fdcf3a38290b6f7a8a60d42))
+* **AB#44010:** add Angular router examples for Link and LinkButton ([8b3093f](https://github.com/ogcio/govie-ds/commit/8b3093f5b20df0c4c06577b83e5e78bb8027767c))
+* **AB#44210:** add 'styles' prop to BreadcrumbEllipsis ([816e784](https://github.com/ogcio/govie-ds/commit/816e784c156af270c1a8bc0dae7f6f3b23f37cb9))
+* **AB#44210:** deprecate legacy breadcrumbs & export new ([d84ae19](https://github.com/ogcio/govie-ds/commit/d84ae195683ef01f5ebc1e4ee5f37737a657efde))
+
+
+### Bug Fixes
+
+* **AB#44263:** add aria-current to Button ([a371e64](https://github.com/ogcio/govie-ds/commit/a371e64bea709762ed88c1b5be0b5ee45be89761))
+* **AB#44711:** stop Angular wrappers leaking inputs onto the host element ([27b8717](https://github.com/ogcio/govie-ds/commit/27b8717854f0f1a957d31e75a116e91245a5f9e4))
+
+
+### Miscellaneous Chores
+
+* **AB#41198:** exclude generated icons from test coverage ([a42fe78](https://github.com/ogcio/govie-ds/commit/a42fe7812136f867de0eea40dc164c1c7f779a00))
+* **AB#41725:** type shared breadcrumb story args explicitly ([f3b04c7](https://github.com/ogcio/govie-ds/commit/f3b04c745e05cfafc047a7d919c311a9c02d7122))
+* **AB#44010:** clean up Button and IconButton stories ([22dd10d](https://github.com/ogcio/govie-ds/commit/22dd10d3fb81278725bb8d38dde5c3d7b36e560b))
+* **AB#44010:** extract IconButton styles into their own module ([d50f50d](https://github.com/ogcio/govie-ds/commit/d50f50d571b9766c5d45bb5556dc042af5f905fc))
+
+## [0.4.0](https://github.com/ogcio/govie-ds/compare/angular-v0.3.0...angular-v0.4.0) (2026-10-06)
+
+
+### Features
+
+* **AB#39576:** implement breadcrumbs in mitosis-core ([a87ed7b](https://github.com/ogcio/govie-ds/commit/a87ed7b95982291936c6cc8e8e563619755ac817))
+* **AB#39796:** run Angular Storybook play functions as Vitest tests ([40cd3b5](https://github.com/ogcio/govie-ds/commit/40cd3b5bab74b6570b18fc703d0302fb31be3689))
+* **AB#41718:** add stories for sidenav family ([5f2a39d](https://github.com/ogcio/govie-ds/commit/5f2a39d8daa6de82ea805a3fb3fce11384c95801))
+* **AB#43523:** add Angular typography directives for base elements ([a140fcf](https://github.com/ogcio/govie-ds/commit/a140fcfda8d3f312b35209a5daeab47553578f32))
+* **AB#43755:** add Angular typography wrappers with a native public API ([2b72bb8](https://github.com/ogcio/govie-ds/commit/2b72bb841de882253dbc59d0136a225dc1662180))
+* **AB#44009:** add Angular Box wrapper with a native public API ([d44a29b](https://github.com/ogcio/govie-ds/commit/d44a29b23c13f5066cd18049b0ff8aa2cfdf38e7))
+* **AB#44009:** add Angular Container wrapper with a native public API ([93a8c51](https://github.com/ogcio/govie-ds/commit/93a8c51a99022db003f64b9b2f0b66a3e34d250f))
+* **AB#44009:** add Angular Divider wrapper with a native public API ([18cd15f](https://github.com/ogcio/govie-ds/commit/18cd15f098771888386719f93a6b04c00430bef1))
+* **AB#44009:** add Angular Grid wrapper with a native public API ([0012b75](https://github.com/ogcio/govie-ds/commit/0012b751babe3e5d34a75be657a08cdf6eb98106))
+* **AB#44009:** add Angular Stack wrapper with a native public API ([a06a8a3](https://github.com/ogcio/govie-ds/commit/a06a8a3e88036d97be4614acd128e6648c3d1dbe))
+
+
+### Bug Fixes
+
+* **AB#41718:** align SideNavHeading inset with items ([7b2eb69](https://github.com/ogcio/govie-ds/commit/7b2eb69cab75282c79a38e058a32bc3b46f7fe0b))
+
+
+### Miscellaneous Chores
+
+* **AB#39796:** build the Angular library with `ng build` ([59e0fce](https://github.com/ogcio/govie-ds/commit/59e0fce57668b769109d6fafdbcb7414a9793858))
+* **AB#39796:** bump Angular Storybook to 10.6.0 ([fa2dd8c](https://github.com/ogcio/govie-ds/commit/fa2dd8c474a0551d208f8421f47f25ed7f6626a7))
+* **AB#39796:** move Angular Storybook to `@storybook/angular-vite` ([e0916ee](https://github.com/ogcio/govie-ds/commit/e0916ee67d8a1c20cecf0751fcd2f167aa94d0a0))
+* **AB#41718:** align SideNav stories with their args and public API ([e051e7a](https://github.com/ogcio/govie-ds/commit/e051e7a41edd38e2e445c5d7e17617aa14608e50))
+* **AB#43755:** extract Paragraph and InsetText styles into their own modules ([80af6c8](https://github.com/ogcio/govie-ds/commit/80af6c80bd1130e36478ff1dc254f05a43dc912a))
+* **AB#44009:** ignore HTML whitespace when formatting Angular templates ([9d012b5](https://github.com/ogcio/govie-ds/commit/9d012b5d1971a76825b02f0fdf598b0f958280ac))
+* **AB#44170:** move generated typography components to `core-*` selectors ([02bb89c](https://github.com/ogcio/govie-ds/commit/02bb89c702efee03ab239ce0a5062ca3602ac4a6))
+* **AB#44170:** resolve the Angular Prettier config for generated code ([89d394e](https://github.com/ogcio/govie-ds/commit/89d394ee8fee516e5b06292db11a3b85903a4b7b))
+* **container:** note where the default gutters come from ([bcc0ea6](https://github.com/ogcio/govie-ds/commit/bcc0ea61056667ec9e8acf9e36eda434cefe4668))
+
 ## [0.3.0](https://github.com/ogcio/govie-ds/compare/angular-v0.2.0...angular-v0.3.0) (2026-09-22)
 
 

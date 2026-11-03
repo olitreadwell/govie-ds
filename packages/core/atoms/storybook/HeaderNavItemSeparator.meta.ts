@@ -4,8 +4,7 @@ import { Orientation, Size } from '../constants';
 import { boxMeta } from './Box.meta';
 import { checker, enumType } from './utilities';
 
-export const headerNavItemSeparatorMeta = {
-  tags: ['autodocs'] as string[],
+export const meta = {
   title: 'Layout/Header/HeaderNavItemSeparator',
   args: {
     visible: undefined,
@@ -38,7 +37,6 @@ export const headerNavItemSeparatorMeta = {
 };
 
 export const Default = {
-  args: headerNavItemSeparatorMeta.args,
   play: async ({ canvasElement, step, args }: StoryContext<Renderer>) => {
     const canvas = within(canvasElement as HTMLElement);
     const check = checker(args.dataTestId, canvas, step);

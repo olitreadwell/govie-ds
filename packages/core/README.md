@@ -10,7 +10,7 @@ By using Mitosis, we ensure that:
 
 ## Scripts
 
-- `pnpm build` — full generation process for all supported frameworks.
+- `pnpm build:all` — full generation process for all supported frameworks.
 - `pnpm build:react` — React-only generation into `@ogcio/design-system-react`.
 - `pnpm build:angular` — Angular-only generation into `@ogcio/design-system-angular`.
 - `pnpm build:watch` — re-generate on every change in `atoms/`.
@@ -37,7 +37,7 @@ Components live in `packages/core/atoms/<Component>.lite.tsx`. Each component de
 
 `.lite.tsx` is source for a generator, not code that runs, so several constructs compile cleanly for one target and break another. `eslint.config.js` bans the ones that can be caught statically; each rule's message explains the mechanism and the fix.
 
-Run `pnpm build:watch` while developing. The watcher regenerates the React and Angular outputs on every save, so the per-target shape evolves alongside the source. Generator plugins live in `packages/core/plugins/` (for example `strip-ref.ts`) and are wired through `react.config.ts` / `angular.config.ts`; reach for a plugin only when a generated output needs an across-the-board adjustment that the `.lite.tsx` source cannot express.
+Run `pnpm build:watch` while developing. The watcher regenerates the React and Angular outputs on every save, so the per-target shape evolves alongside the source. Generator plugins live in `packages/core/plugins/` (for example `strip-props.ts`) and are wired through `react.config.ts` / `angular.config.ts`; reach for a plugin only when a generated output needs an across-the-board adjustment that the `.lite.tsx` source cannot express.
 
 ### 2. Describe shared Storybook metadata
 
@@ -47,7 +47,7 @@ Every prop entry needs a `description` and a `table.type.summary`. Autodocs buil
 
 ### 3. Generate
 
-Run `pnpm build`. The generator emits React output to `packages/react/src/atoms/<Component>.tsx` and Angular output to `packages/angular/src/atoms/<Component>.ts`. Inspect both: generation can be quietly wrong in one target while clean in another, and the output is part of the review surface.
+Run `pnpm build:all`. The generator emits React output to `packages/react/src/atoms/<Component>.tsx` and Angular output to `packages/angular/src/atoms/<Component>.ts`. Inspect both: generation can be quietly wrong in one target while clean in another, and the output is part of the review surface.
 
 ### 4. Write per-target stories
 
