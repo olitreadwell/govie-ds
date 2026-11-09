@@ -21,7 +21,7 @@ export type Props = {
   onBlur?: (event: any) => void;
   onKeyDown?: (event: any) => void;
   onKeyUp?: (event: any) => void;
-  ariaHidden?: boolean;
+  ariaHidden?: boolean | 'true' | 'false';
   ariaLabel?: string;
   ariaControls?: string;
   tabIndex?: number;
@@ -31,6 +31,7 @@ const defaultProps: any = { ariaHidden: undefined };
 
 import classes, { actionClasses, arrowClasses, chevronClasses, rowClasses } from './SideNavItem.styles';
 import GiKeyboardArrowDownIcon from '../icons/KeyboardArrowDown';
+import { isAriaHidden } from '../utilities';
 import { tv } from 'tailwind-variants';
 const contentClasses = tv({
   base: 'gi-side-nav-group',
@@ -44,11 +45,14 @@ const contentClasses = tv({
     open: false,
   },
 });
+const listItemClasses = tv({
+  base: 'gi-list-none gi-mt-1 gi-side-nav-list',
+});
 
 @Component({
   selector: 'gi-side-nav-group',
   template: `
-    <li class="gi-list-none gi-mt-1 gi-side-nav-list" [attr.aria-hidden]="ariaHidden">
+    <li [class]="listItemClasses()" [attr.aria-hidden]="ariaHidden">
       <div [class]="rowClasses()">
         <button
           type="button"
@@ -69,7 +73,7 @@ const contentClasses = tv({
           [attr.aria-label]="ariaLabel"
           [attr.aria-expanded]="!!open"
           [attr.aria-controls]="ariaControls"
-          [attr.tabIndex]="ariaHidden ? -1 : tabIndex"
+          [attr.tabIndex]="isAriaHidden(ariaHidden) ? -1 : tabIndex"
           [attr.data-testid]="dataTestId"
         >
           <ng-content select="[label]"></ng-content>
@@ -117,11 +121,13 @@ const contentClasses = tv({
 })
 export default class SideNavGroup {
   contentClasses = contentClasses;
+  listItemClasses = listItemClasses;
   classes = classes;
   actionClasses = actionClasses;
   arrowClasses = arrowClasses;
   chevronClasses = chevronClasses;
   rowClasses = rowClasses;
+  isAriaHidden = isAriaHidden;
 
   @Input() ariaHidden: Props['ariaHidden'] = defaultProps['ariaHidden'];
   @Input() id!: Props['id'];

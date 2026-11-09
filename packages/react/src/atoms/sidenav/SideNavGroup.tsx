@@ -21,7 +21,7 @@ export type Props = {
   onBlur?: (event: any) => void;
   onKeyDown?: (event: any) => void;
   onKeyUp?: (event: any) => void;
-  ariaHidden?: boolean;
+  ariaHidden?: boolean | 'true' | 'false';
   ariaLabel?: string;
   ariaControls?: string;
   tabIndex?: number;
@@ -30,6 +30,7 @@ export type Props = {
 
 import classes, { actionClasses, arrowClasses, chevronClasses, rowClasses } from './SideNavItem.styles';
 import GiKeyboardArrowDownIcon from '../icons/KeyboardArrowDown';
+import { isAriaHidden } from '../utilities';
 import { tv } from 'tailwind-variants';
 const contentClasses = tv({
   base: 'gi-side-nav-group',
@@ -43,11 +44,14 @@ const contentClasses = tv({
     open: false,
   },
 });
+const listItemClasses = tv({
+  base: 'gi-list-none gi-mt-1 gi-side-nav-list',
+});
 
 function SideNavGroup(props: Props) {
   props = { ariaHidden: undefined, ...props };
   return (
-    <li className="gi-list-none gi-mt-1 gi-side-nav-list" aria-hidden={props.ariaHidden}>
+    <li className={listItemClasses()} aria-hidden={props.ariaHidden}>
       <div className={rowClasses()}>
         <button
           type="button"
@@ -66,7 +70,7 @@ function SideNavGroup(props: Props) {
           aria-label={props.ariaLabel}
           aria-expanded={!!props.open}
           aria-controls={props.ariaControls}
-          tabIndex={props.ariaHidden ? -1 : props.tabIndex}
+          tabIndex={isAriaHidden(props.ariaHidden) ? -1 : props.tabIndex}
           data-testid={props.dataTestId}
         >
           <>{props.label}</>
