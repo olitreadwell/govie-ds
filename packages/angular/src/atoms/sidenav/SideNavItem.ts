@@ -14,7 +14,7 @@ export type Props = {
   actions?: any;
   disabled?: boolean;
   className?: string;
-  styles?: Record<string, string>;
+  styles?: string | Record<string, string | number | null | undefined>;
   onClick?: (event: any) => void;
   onFocus?: (event: any) => void;
   onBlur?: (event: any) => void;
@@ -32,7 +32,7 @@ import { isAriaHidden } from '../utilities';
 import classes, { actionClasses, listItemClasses } from './SideNavItem.styles';
 
 @Component({
-  selector: 'gi-side-nav-item',
+  selector: 'core-side-nav-item',
   template: `
     <li [class]="listItemClasses()" [attr.aria-hidden]="ariaHidden">
       <button
@@ -45,7 +45,7 @@ import classes, { actionClasses, listItemClasses } from './SideNavItem.styles';
             className: className,
           })
         "
-        [ngStyle]="styles"
+        [style]="styles"
         [attr.disabled]="disabled || undefined"
         (click)="onClick && this.onClick.emit($event)"
         (focus)="onFocus && this.onFocus.emit($event)"

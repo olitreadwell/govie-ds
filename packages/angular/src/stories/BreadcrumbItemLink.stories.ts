@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/angular-vite';
 import { withRouter } from '@/stories/router';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import * as stories from '@/atoms/storybook/BreadcrumbLink.meta';
-import { HomeIcon, PersonIcon, SettingsIcon } from '@/atoms';
+import { HomeIcon, PersonIcon, SettingsIcon } from '@/icons';
 import { GiBreadcrumbItemLink, GiBreadcrumbLinkDirective } from '@/breadcrumbs/BreadcrumbItemLink';
 import { GiBreadcrumbs } from '@/breadcrumbs/Breadcrumbs';
 import { GiBreadcrumbItemDirective } from '@/breadcrumbs/BreadcrumbItem';
@@ -35,7 +35,7 @@ const meta: Meta = {
         'Inline styles applied directly to the anchor element. Use for truly dynamic values that cannot be expressed as Tailwind classes.',
       table: {
         type: {
-          summary: 'Record<string, string>',
+          summary: 'string | Record<string, string | number | null | undefined>',
         },
       },
     },
