@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { within, expect } from 'storybook/test';
-import Footer from '@/atoms/footer/Footer';
-import FooterSection from '@/atoms/footer/FooterSection';
-import FooterLogo from '@/atoms/footer/FooterLogo';
+import Footer from '@/Footer';
+import FooterSection from '@/FooterSection';
+import FooterLogo from '@/FooterLogo';
 import { SurfaceVariant } from '@/atoms/constants';
 import Text from '@/atoms/Text';
 import H4 from '@/atoms/heading/H4';
@@ -16,9 +16,18 @@ import FacebookIcon from '@/atoms/icons/socials/Facebook';
 import BlueskyIcon from '@/atoms/icons/socials/Bluesky';
 import LinkedinIcon from '@/atoms/icons/socials/Linkedin';
 import * as stories from '@/atoms/storybook/Footer.meta';
+import argTypes from '@/atoms/storybook/argTypes';
 
 const meta: Meta = {
   ...stories.meta,
+  argTypes: {
+    ...stories.meta.argTypes,
+    className: argTypes.class,
+    style: {
+      ...argTypes.style,
+      table: { type: { summary: 'React.CSSProperties' } },
+    },
+  },
   title: 'Layout/Footer/Footer',
   component: Footer,
 };
