@@ -42,9 +42,27 @@ export {
 } from './header/HeaderNavItemSeparator.vue';
 export { default as HeaderTitle } from './header/HeaderTitle.vue';
 
+// Breadcrumbs
+export { default as Breadcrumbs } from './breadcrumbs/Breadcrumbs.vue';
+export { default as BreadcrumbLink, type Props as BreadcrumbLinkProps } from './breadcrumbs/BreadcrumbLink.vue';
+export {
+  default as BreadcrumbEllipsis,
+  type Props as BreadcrumbEllipsisProps,
+} from './breadcrumbs/BreadcrumbEllipsis.vue';
+
+// Pagination
+export { default as Pagination } from './pagination/Pagination.vue';
+export { default as PaginationLink, type Props as PaginationLinkProps } from './pagination/PaginationLink.vue';
+export { default as PaginationButton, type Props as PaginationButtonProps } from './pagination/PaginationButton.vue';
+export {
+  default as PaginationEllipsis,
+  type Props as PaginationEllipsisProps,
+} from './pagination/PaginationEllipsis.vue';
+export { getPaginationList } from './atoms/pagination/utils';
+
 // SideNav
-export { default as SideNav, type Props as SideNavProps } from './atoms/sidenav/SideNav.vue';
-export { default as SideNavItem, type Props as SideNavItemProps } from './atoms/sidenav/SideNavItem.vue';
-export { default as SideNavItemLink, type Props as SideNavItemLinkProps } from './atoms/sidenav/SideNavItemLink.vue';
-export { default as SideNavHeading, type Props as SideNavHeadingProps } from './atoms/sidenav/SideNavHeading.vue';
-export { default as SideNavGroup, type Props as SideNavGroupProps } from './atoms/sidenav/SideNavGroup.vue';
+export { default as SideNav, type Props as SideNavProps } from './sidenav/SideNav.vue';
+export { default as SideNavItem, type Props as SideNavItemProps } from './sidenav/SideNavItem.vue';
+export { default as SideNavItemLink, type Props as SideNavItemLinkProps } from './sidenav/SideNavItemLink.vue';
+export { default as SideNavHeading, type Props as SideNavHeadingProps } from './sidenav/SideNavHeading.vue';
+export { default as SideNavGroup, type Props as SideNavGroupProps } from './sidenav/SideNavGroup.vue';
